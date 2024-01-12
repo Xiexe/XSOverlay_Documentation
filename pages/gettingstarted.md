@@ -10,63 +10,63 @@
 !> _Controller bindings can be changed through the SteamVR Bindings Menu, this list only represents the default bindings._
 
 <!-- tabs:start -->
-#### **Valve Index**
->### Opening Layout Mode
+### **Valve Index**
+>#### Opening Layout Mode
 >_Double tap the left **A** button, or click on the [Layout Mode](GettingStarted?id=layout-mode) button on the Wrist Overlay._
 
->### Grabbing an Overlay
+>#### Grabbing an Overlay
 >_Point at an overlay, and squeeze the grip._
 
->### Scaling an Overlay
+>#### Scaling an Overlay
 >_While holding, pull the trigger and move your hand forward / back._
 
->### Left Click
+>#### Left Click
 >_Pull the trigger._
 
->### Middle Click
+>#### Middle Click
 >_Touch the top half of the trackpad, and pull the trigger._
 
->### Right Click
+>#### Right Click
 >_Touch the bottom half of the trackpad, and pull the trigger._
 
 
-#### **HTC Vive / WMR**
->### Opening Layout Mode
+### **HTC Vive / WMR**
+>#### Opening Layout Mode
 >_Double squeeze the left grip, or click on the [Layout Mode](GettingStarted?id=layout-mode) button on the Wrist Overlay._
 
->### Grabbing an Overlay
+>#### Grabbing an Overlay
 >_Point at an overlay, and squeeze the grip._
 
->### Scaling an Overlay
+>#### Scaling an Overlay
 >_While holding, pull the trigger and move your hand forward / back._
 
->### Left Click
+>#### Left Click
 >_Pull the trigger._
 
->### Middle Click
+>#### Middle Click
 >_Touch the Inner half of the trackpad, and pull the trigger._
 
->### Right Click
+>#### Right Click
 >_Touch the Outer half of the trackpad, and pull the trigger._
 
 
-#### **Oculus**
->### Opening Layout Mode
+### **Oculus**
+>#### Opening Layout Mode
 >_Double tap the **X** button, or click on the [Layout Mode](GettingStarted?id=layout-mode) button on the Wrist Overlay._
 
->### Grabbing an Overlay
+>#### Grabbing an Overlay
 >_Point at an overlay, and squeeze the lower trigger._
 
->### Scaling an Overlay
+>#### Scaling an Overlay
 >_While holding, pull the trigger and move your hand forward / back._
 
->### Left Click
+>#### Left Click
 >_Pull the trigger._
 
->### Middle Click
+>#### Middle Click
 >_Touch, not press, the top face button (**Y** or **B**), and pull the trigger._
 
->### Right Click
+>#### Right Click
 >_Touch, not press, the bottom face button (**X** or **A**), and pull the trigger._
 <!-- tabs:end -->
 
