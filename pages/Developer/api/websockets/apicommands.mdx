@@ -1,98 +1,102 @@
 import { Callout } from 'nextra/components'
 
 # API Commands
-Some API commands will return data back to your application, and some will not. 
+Interacting with the API is split into two groups of commands, one way commands and two way commands.
 
-You should handle these with the `OnMessage` event for your websocket client library.
+One way commands are simple, and are just a command that you send to tell the overlay to *do* something.
 
-## ToggleLayoutMode
+Two way commands are commands that, after completing the requested task, the overlay will send you back a response.
+These commands should be handled in your websocket's `OnMessage` event.
+
+## One Way Commands
+### ToggleLayoutMode
 _Toggles layout mode on or off._
 
 ***
-## TogglePerformanceStats
+### TogglePerformanceStats
 _Toggles performance overlay on or off._
 
 ***
-## Create
+### Create
 _Layout mode toolbar create button, creates an overlay._
 
 ***
-## Recenter
+### Recenter
 _Layout mode toolbar recenter button, Recenters the overlay space._
 
 ***
-## Keyboard
+### Keyboard
 _Layout mode toolbar keyboard button. Summons / dismisses the keyboard._
 
 ***
-## Layouts
+### Layouts
 _Layout mode toolbar layouts folder button. Summons / dismisses the layout folder._
 
 ***
-## Settings
+### Settings
 _Layout mode toolbar settings button. Summons / dismisses settings panel._
 
 ***
-## DeleteAll
+### DeleteAll
 _Layout mode toolbar delete button. Deletes all active overlays._
 
 ***
-## WindowSwitcher
+### WindowSwitcher
 _Layout mode toolbar grid view button._
 
 ***
-## MediaPlayPause
+### MediaPlayPause
 _Toggles play / pause on media player_
 
 ***
-## MediaPrevious
+### MediaPrevious
 _Goes back to previous media._
 
 ***
-## MediaNext
+### MediaNext
 _Skips to next media._
 
 ***
-## WindowSettings
+### WindowSettings
 _Toggles if the window settings panel is visible._
 
 ***
-## WindowSelect
+### WindowSelect
 _Toggles if the window select panel is visible._
 
 ***
-## WindowDelete
+### WindowDelete
 _Deletes the overlay that has ownership of the window toolbar._
 
 ***
-## UpdateMediaPlayerInformation
+### UpdateMediaPlayerInformation
 _Updates the media player information with an XSOMediaObject._
 
 ***
-## SetXSOverlaySystemSetting
+### SetXSOverlaySystemSetting
 _Sets a user settings._
 
 ***
-## SetActiveOverlaySetting
+### SetActiveOverlaySetting
 _Sets a setting on the currently active overlay._
 
 ***
-## RequestShowTooltip
+### RequestShowTooltip
 _Requests to show a tooltip._
 
 ***
-## OpenSteamVRBindings
+### OpenSteamVRBindings
 _Opens the SteamVR Binding Dashboard Page for XSO_
 
 ***
-## SendNotification
+### SendNotification
 _Sends a notification._
 <Callout>
 _Websocket notification format is slightly different from UDP notification format. Please make sure your notification object is up to date._
 </Callout>
 
 ![Notification Markup](../../../../img/notification/NotificationMarkup.png "Notification Markup")
-### Websocket Notification Object
+#### Websocket Notification Object
 | Property | Type | Description | Default Value |
 | --- | --- | --- | --- |
 | `type` | `int` | The type of message to send. `1` defines a normal notification. | `1` |
@@ -109,22 +113,24 @@ _Websocket notification format is slightly different from UDP notification forma
 | `sourceApp` | `string` | Somewhere to put your app name for debugging purposes. | `""` |
 
 ***
-## RequestUpdateCursorCollisionTexture
+### RequestUpdateCursorCollisionTexture
 _Requests that the collision area for the panel be updated. Prevents cursor being visible on transparent parts of UI. May not update instantly._
 
 ***
-## SubscribeToEvents
+### SubscribeToEvents
 _Allows the application to subscribe to a set of tags that correspond to events that have return objects. See [Subscribing to Events](websockets#subscribing-to-events)_
 
 ***
 ### Log
 _Logs a message to the output log._
 
+
+## Two Way Commands
 ***
-## RequestDateTime
+### RequestDateTime
 _Returns the current date and time, including session length, formatted based on User Setting_
-### Return Object
-```json
+#### Return Object
+```json filename="json"
 {
     "target" : "yourappname",
     "command": "UpdateDateTime",
@@ -136,10 +142,10 @@ _Returns the current date and time, including session length, formatted based on
 }
 ```
 
-## RequestThemeUpdate
+### RequestThemeUpdate
 _Returns the current theme colors in hexadecimal_
-### Return Object
-```json
+#### Return Object
+```json filename="json"
 {
     "target" : "yourappname",
     "command": "UpdateTheme",
@@ -159,13 +165,13 @@ _Returns the current theme colors in hexadecimal_
 
 ***
 
-## RequestSteamAvatar
+### RequestSteamAvatar
 _Returns the steam avatar of the user_
 <Callout>
 _This command uses the `rawData` field of `XSOApiObject` rather than the `jsonData` field._
 </Callout>
 
-### Use
+#### Use
 ```cs
     XSOApiObject.target = "xsoverlay";
     XSOApiObject.command = "RequestSteamAvatar";
@@ -173,8 +179,8 @@ _This command uses the `rawData` field of `XSOApiObject` rather than the `jsonDa
 
     WebsocketClient.Send(JsonSerializer.Serialize(XSOAbiObject));
 ```
-### Return Object
-```json
+#### Return Object
+```json filename="json"
 {
     "target" : "yourappname",
     "command": "UpdateSteamAvatar",
@@ -184,10 +190,10 @@ _This command uses the `rawData` field of `XSOApiObject` rather than the `jsonDa
 ```
 
 ***
-## RequestDeviceInformation 
+### RequestDeviceInformation 
 _Returns a list of devices and information about those devices_
-### Return Object
-```json
+#### Return Object
+```json filename="json"
 {
     "target" : "yourappname",
     "command": "UpdateDeviceInformation",
@@ -226,10 +232,10 @@ _Returns a list of devices and information about those devices_
 
 
 ***
-## RequestLayoutModeState 
+### RequestLayoutModeState 
 _Returns the current open / closed state of Layout Mode_
-### Return Object
-```json
+#### Return Object
+```json filename="json"
 {
     "target" : "yourappname",
     "command": "UpdateLayoutModeState",
@@ -239,10 +245,10 @@ _Returns the current open / closed state of Layout Mode_
 ```
 
 ***
-## RequestMediaPlayerUpdate 
+### RequestMediaPlayerUpdate 
 _Returns the current media information_
-### Return Object
-```json
+#### Return Object
+```json filename="json"
 {
     "target" : "yourappname",
     "command": "UpdateMediaPlayer",
@@ -257,10 +263,10 @@ _Returns the current media information_
 ```
 
 ***
-## RequestGetSettings
+### RequestGetSettings
 _Returns user settings for the overlay_
-### Return Object
-```json
+#### Return Object
+```json filename="json"
 {
     "target" : "yourappname",
     "command": "UpdateSettings",
@@ -357,10 +363,10 @@ _Returns user settings for the overlay_
 ```
 
 ***
-## RequestUpdatedLanguageList 
+### RequestUpdatedLanguageList 
 _Returns the list of possible languages_
-### Return Object
-```json
+#### Return Object
+```json filename="json"
 {
     "target" : "yourappname",
     "command": "UpdateLanguageList",
@@ -373,10 +379,10 @@ _Returns the list of possible languages_
 ```
 
 ***
-## RequestUpdatedLanguageMap
+### RequestUpdatedLanguageMap
 _Returns the map of strings for the currently selected language_
-### Return Object
-```json
+#### Return Object
+```json filename="json"
 {
     "target" : "yourappname",
     "command": "UpdateLanguageMap",
@@ -388,10 +394,10 @@ _Returns the map of strings for the currently selected language_
 ```
 
 ***
-## RequestAchievementInformation 
+### RequestAchievementInformation 
 _Returns list of achievements with a boolean for unlocked / locked for the user._
-### Returns
-```json
+#### Returns
+```json filename="json"
 {
     "target" : "yourappname",
     "command": "UpdateAchievementStatus",
@@ -404,10 +410,10 @@ _Returns list of achievements with a boolean for unlocked / locked for the user.
 ```
 
 ***
-## RequestWindowList 
+### RequestWindowList 
 _Returns a list of capturable windows._
-### Return Object
-```json
+#### Return Object
+```json filename="json"
 {
     "target" : "yourappname",
     "command": "UpdateWindowList",
@@ -416,10 +422,10 @@ _Returns a list of capturable windows._
 ```
 
 ***
-## RequestActiveOverlayInformation
+### RequestActiveOverlayInformation
 _Requests the current active overlay. This is the overlay that has ownership of the window toolbar_
-### Return Object
-```json
+#### Return Object
+```json filename="json"
 {
     "target" : "yourappname",
     "command": "UpdateActiveOverlayInformation",
@@ -440,9 +446,9 @@ _Requests the current active overlay. This is the overlay that has ownership of 
 }
 ```
 
-## RequestRuntimePerformance
+### RequestRuntimePerformance
 _Requests information about system resource usage, such as CPU, GPU, and Memory._
-### Return Object
+#### Return Object
 ```json
 // not implemented yet.
 ```
