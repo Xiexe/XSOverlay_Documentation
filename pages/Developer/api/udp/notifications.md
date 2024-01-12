@@ -1,8 +1,5 @@
 # Notifications API
-
-XSOverlay has a websocket based API for sending notifications to the overlay. 
-
-!> **Notice:** XSOverlay is migrating the Notification API to a websocket protocol. This API remain for legacy application, but futher development and support will be migrated to [Websocket API](WebsocketAPI)
+!> **Notice:** XSOverlay is migrating the Notification API to a websocket protocol. This API remains for legacy application, but futher development and support will be migrated to [Websocket API](../websockets/websockets#sendnotification)
 
 
 ***
