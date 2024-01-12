@@ -8,4 +8,4 @@ In order to contribute, you will need to do the following:
 [] Install Next: `npm i next`
 [] Run local dev site `npm run dev`
 
-The site will compile any new changes while running. Once you've made your desired changes, just 
+The site will compile any new changes while running. Once you've made your desired changes, just create a PR with an appropriate title.
