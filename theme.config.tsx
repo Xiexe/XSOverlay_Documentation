@@ -2,7 +2,15 @@ import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
-  logo: <span>XSOverlay Documentation</span>,
+  head: (
+    <>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta property="og:title" content="XSOverlay Documentation" />
+      <meta property="og:description" content="Documentation for XSOverlay." />
+    </>
+  ),
+
+  logo: <strong>XSOverlay Documentation</strong>,
   project: {
     link: 'https://github.com/Xiexe/XSOverlayDocumentationVercel',
   },
