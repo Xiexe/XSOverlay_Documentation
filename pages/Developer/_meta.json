@@ -1,6 +1,6 @@
 {
-  "webapps": "Web Applications",
-  "osc": "OSC API",
-  "udp": "UDP API (Legacy)",
-  "websocket": "Websockets API"
+  "websocket": "Websockets API",
+  "oscApi": "OSC API",
+  "udpApi": "UDP API (Legacy)",
+  "soundpacks": "Soundpacks"
 }
