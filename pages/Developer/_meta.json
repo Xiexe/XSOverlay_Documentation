@@ -1,6 +1,6 @@
 {
-  "OSCAPI": "OSC API",
-  "WebApplications": "Web Applications",
+  "webapps": "Web Applications",
+  "osc": "OSC API",
   "udp": "UDP API (Legacy)",
   "websocket": "Websockets API"
 }
