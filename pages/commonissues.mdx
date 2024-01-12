@@ -1,3 +1,5 @@
+import { Callout } from 'nextra/components'
+
 # Common Issues
 The section below describes are some common issues that some users have encountered when using XSOverlay. 
 
@@ -62,7 +64,8 @@ The following options can be configured:
 Edit the entry for WebSocketPort to a port that you know is not taken. The app will read the configuration file and use the `WebsocketPort` and `1 + WebsocketPort`. 
 For example, if set to port `40000`, the app will hook port `40000` and `40001` so make sure that both are free.
 
-!> You will likely need to use a port number between `20000` and `49150`. It is not advised to configure XSOverlay to use ports outside of this range as it conflict with ports allocated to your operating system or subsystem services 
-
+<Callout>
+You will likely need to use a port number between `20000` and `49150`. It is not advised to configure XSOverlay to use ports outside of this range as it conflict with ports allocated to your operating system or subsystem services 
+</Callout>
  
 

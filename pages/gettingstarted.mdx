@@ -1,16 +1,24 @@
+import { Callout, Tabs } from 'nextra/components'
+
 # Getting Started
 
 ## Layout Mode
-!>[Layout Mode](GettingStarted?id=layout-mode) can be opened by pressing the [Layout Mode](GettingStarted?id=layout-mode) button on the wrist overlay, or by pressing the correct binding to open it. Layout mode allows you to move overlays around, apply modifiers to overlays, change overlay capture targets, and change overlays settings.
-<br><br>Below are all of the default bindings and interaction methods for each controller.
-<br><br>_Note: You can change all bindings by opening the settings and clicking the "Bindings" button. This will take you to the SteamVR bindings page for XSOverlay._
+<Callout type="info">
+[Layout Mode](GettingStarted?id=layout-mode) can be opened by pressing the [Layout Mode](GettingStarted?id=layout-mode) button on the wrist overlay, or by pressing the correct binding to open it. Layout mode allows you to move overlays around, apply modifiers to overlays, change overlay capture targets, and change overlays settings.
+Below are all of the default bindings and interaction methods for each controller.
 
+_Note: You can change all bindings by opening the settings and clicking the "Bindings" button. This will take you to the SteamVR bindings page for XSOverlay._
+</Callout>
 ***
 ## Controller Bindings
-!> _Controller bindings can be changed through the SteamVR Bindings Menu, this list only represents the default bindings._
+<Callout type="warning">
+_Controller bindings can be changed through the SteamVR Bindings Menu, this list only represents the default bindings._
+</Callout>
 
-<!-- tabs:start -->
-### **Valve Index**
+<Tabs items={["Index", "Vive / WMR", "Oculus / Meta"]}>
+<Tabs.Tab>
+
+### **Index**
 >#### Opening Layout Mode
 >_Double tap the left **A** button, or click on the [Layout Mode](GettingStarted?id=layout-mode) button on the Wrist Overlay._
 
@@ -29,6 +37,9 @@
 >#### Right Click
 >_Touch the bottom half of the trackpad, and pull the trigger._
 
+</Tabs.Tab>
+
+<Tabs.Tab>
 
 ### **HTC Vive / WMR**
 >#### Opening Layout Mode
@@ -49,6 +60,10 @@
 >#### Right Click
 >_Touch the Outer half of the trackpad, and pull the trigger._
 
+</Tabs.Tab>
+
+
+<Tabs.Tab>
 
 ### **Oculus**
 >#### Opening Layout Mode
@@ -68,13 +83,18 @@
 
 >#### Right Click
 >_Touch, not press, the bottom face button (**X** or **A**), and pull the trigger._
-<!-- tabs:end -->
+
+</Tabs.Tab>
+
+</Tabs>
 
 ***
 
 ## Wrist Overlay
-!> _The Wrist Overlay can be found on the back of your left hand by default._
-<br><br>_Below lists the buttons found on the Wrist Overlay_
+<Callout type="info">
+_The Wrist Overlay can be found on the back of your left hand by default._
+_Below lists the buttons found on the Wrist Overlay_
+</Callout>
 
 >### Layout Mode
 >Toggles [Layout Mode](GettingStarted?id=layout-mode) on or off without the need to use the controller binding.

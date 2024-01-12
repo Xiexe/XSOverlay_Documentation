@@ -64,7 +64,9 @@ You should handle these with the `OnMessage` event for your websocket client lib
 >_Opens the SteamVR Binding Dashboard Page for XSO_
 
 >## SendNotification
->!>_Websocket notification format is slightly different from UDP notification format._
+<Callout>
+>_Websocket notification format is slightly different from UDP notification format._
+</Callout>
 >_Sends a notification._
 >![Notification Markup](../../../../img/notification/NotificationMarkup.png "Notification Markup")
 >### Notification Object
@@ -130,7 +132,9 @@ You should handle these with the `OnMessage` event for your websocket client lib
 >```
 
 >## RequestSteamAvatar
->!>_This command uses the rawData field of XSOApiObject rather than the JsonData field._
+<Callout>
+>_This command uses the rawData field of XSOApiObject rather than the JsonData field._
+</Callout>
 >_Returns the steam avatar of the user_
 >### Use
 >```cs

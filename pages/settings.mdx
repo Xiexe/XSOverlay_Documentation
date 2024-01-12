@@ -1,10 +1,18 @@
+import { Callout } from 'nextra/components'
+
 # Settings
-!>_Settings are saved as a json file located at `C:\Users\[YOURUSERNAMEHERE]\AppData\LocalLow\Xiexe\XSOverlay\config\overlaySettings.json`_
+<Callout>
+_Settings are saved as a json file located at `C:\Users\[YOURUSERNAMEHERE]\AppData\LocalLow\Xiexe\XSOverlay\config\overlaySettings.json`_
+</Callout>
 ***
 
-# Windows
+## Windows
 >### Window Capture API
->_Allows you to select between two capture methods for Window Captures, BitBlt, and Windows Graphics Capture. <br><br>Windows Graphics Capture is faster, and less resource intensive, but will put a yellow border around any winodw that is captured by it. This will not be visible in the capture, but will be visible if the captured window is also being displayed on a Desktop Capture. <br><br>BitBlt will not put a yellow border around the captured window, but is significantly slower and more resource intensive to use. <br><br>Desktop captures will always use Windows Graphics Capture if available, and will fall back to BitBlt when not. (Windows 10 builds prior to 1903)_
+>_Allows you to select between two capture methods for Window Captures, BitBlt, and Windows Graphics Capture._
+>_Windows Graphics Capture is faster, and less resource intensive, but might put a yellow border around windows on Windows 10. Windows 11 does not have this._
+>_This will not be visible in the capture, but will be visible if the captured window is also being displayed on a Desktop Capture._
+>_BitBlt will not put a yellow border around the captured window, but is significantly slower and more resource intensive to use._
+>_Desktop captures will always use Windows Graphics Capture if available, and will fall back to BitBlt when not. (Windows 10 builds prior to 1903)_
 
 >### Curved Overlays
 >_Allows overlays to be curved. Due to SteamVR / OpenVR implementation limitations, overlays will only be curved when within a threshold in front of you, similar to Oculus Dash. Curvature will not work on overlays that are attached to devices. Curvature will not work if "Aim Movement" is turned off._
@@ -53,7 +61,7 @@
 
 ***
 
-# General
+## General
 >### Dominant Hand
 >_Sets the dominant hand. Currently this only changes which hand the wrist overlay is on. Left will put the wrist overlay on the right hand, and vice versa. This requires a restart to change properly._
 
@@ -74,7 +82,7 @@
 
 ***
 
-# Wrist
+## Wrist
 >### Enable
 >_Enables or disables the Wrist Overlay._
 
@@ -98,7 +106,7 @@
 
 ***
 
-# Theme
+## Theme
 >### Dark Theme
 >_Enables or disables dark theme._
 
@@ -107,9 +115,10 @@
 
 ***
 
-# Notifications
-!> _Notifications will **never** be visible unless an external application sends them to you, or unless you get an achievement._
-
+## Notifications
+<Callout>
+_Notifications will **never** be visible unless an external application sends them to you, or unless you get an achievement._
+</Callout>
 >### Scale
 >Changes the overall scale of the notification popup.
 
@@ -121,13 +130,17 @@
 
 ***
 
-# Language
-!>_Allows you to select the language from the list of included language files. Language files can be added in `[XSOverlayInstallationDirectory]/XSOverlay_Data/StreamingAssets/localization/`_
+## Language
+<Callout>
+_Allows you to select the language from the list of included language files. Language files can be added in `[XSOverlayInstallationDirectory]/XSOverlay_Data/StreamingAssets/localization/`_
+</Callout>
 
 ***
 
-# Experimental
-!>_Holds options that may be removed in the future due to SteamVR, or that may be unstable. Use at your own risk._
+## Experimental
+<Callout>
+_Holds options that may be removed in the future due to SteamVR, or that may be unstable. Use at your own risk._
+</Callout>
 
 >### Input Blocking
 >_Allows XSOverlay to take control over input, and stop it from going to the background application. This will only occur if [Layout Mode](gettingstarted#layout-mode) is open. You will regain control over the scene application upon closing [Layout Mode](gettingstarted#layout-mode)._
@@ -137,20 +150,28 @@
 
 ***
 
-# Easter Eggs
-!>_Holds Easter egg toggles, if they've been unlocked._
+## Easter Eggs
+<Callout>
+_Holds Easter egg toggles, if they've been unlocked._
+</Callout>
 
 ***
 
-# Support
-!>_Has links to places to get support, such as the Github issue tracker, Discord, Twitter, or SteamVR forums. These will open a link in your web browser when clicked._
+## Support
+<Callout>
+_Has links to places to get support, such as the Github issue tracker, Discord, Twitter, or SteamVR forums. These will open a link in your web browser when clicked._
+</Callout>
 
 ***
 
-# Debug
-!>_Has debug things. Mostly UI stuff. Also where you can go to reset settings, or reset the tutorial._
+## Debug
+<Callout>
+_Has debug things. Mostly UI stuff. Also where you can go to reset settings, or reset the tutorial._
+</Callout>
 
 ***
 
-# Bindings
-!>_Opens the SteamVR bindings panel for XSOverlay. (Assuming Valve hasn't broken it again on any given day.)_
+## Bindings
+<Callout>
+_Opens the SteamVR bindings panel for XSOverlay. (Assuming Valve hasn't broken it again on any given day.)_
+</Callout>

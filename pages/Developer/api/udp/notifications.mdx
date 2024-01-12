@@ -1,9 +1,12 @@
-# Notifications API
-!> **Notice:** XSOverlay is migrating the Notification API to a websocket protocol. This API remains for legacy application, but futher development and support will be migrated to [Websocket API](../websockets/websockets#sendnotification)
+import { Callout } from 'nextra/components'
 
+# Notifications API
+<Callout type="error">
+**Notice:** XSOverlay is migrating the Notification API to a websocket protocol. This API remains for legacy support, but futher development and support will be migrated to [Websocket API](../websockets/websockets#sendnotification)
+</Callout>
 
 ***
-# Configuration
+## Configuration
 
 XSOverlay, by default, is configured to listen for Notifications messages on port `42069`. This can be changed by editing the `ExternalMessageAPIConfig.json` file located in the `[XSOverlayInstallDirectory]/XSOverlay_Data/StreamingAssets/Plugins/Config/` directory.
 
@@ -17,7 +20,7 @@ The following options can be configured:
 !>_XSOverlay **ONLY** listens for messages from the local host. You **CANNOT** currently send messages over the network to a different machine_
 
 ***
-# XSOverlay Message Object
+## Notification Object
 
 The following is the message object that is to be sent to XSOverlay Notification API.
 
@@ -43,7 +46,7 @@ The following is the message object that is to be sent to XSOverlay Notification
 
 
 ***
-# C# Nuget Package
+## C# Nuget Package
 XSOverlay has an officially maintained [NuGet Package](https://www.nuget.org/packages/XSNotifications/) / [Github repository](https://github.com/nnaaa-vr/XSNotifications) for integrating the Notifications API easily into your C# applications.
 
 ## Code Samples

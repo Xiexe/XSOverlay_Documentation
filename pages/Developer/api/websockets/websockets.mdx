@@ -1,11 +1,9 @@
 # XSOverlay WebSocket API
 
-XSOverlay has a WebSocket based API for interacting with the XSOverlay media player and notification interfaces. 
-
-!>_This is API is currently in development and may not be fully implemented yet. Please visit the discord for further updates._
+XSOverlay has a WebSocket based API for interacting with the Notifications, SteamVR, and the overlay itself.
 
 ***
-# Configuration
+## Configuration
 
 XSOverlay, by default, is configured to listen for WebSocket messages on port `42070`. This can be changed by editing the `ExternalMessageAPIConfig.json` file located in the `[XSOverlayInstallDirectory]/XSOverlay_Data/StreamingAssets/Plugins/Config/` directory.
 
@@ -16,10 +14,11 @@ The following options can be configured:
 | `WebSocketPort` | The port XSOverlay listens to WebSocket messages on. | `42070` |
 
 
-!>_XSOverlay **ONLY** listens for messages from the local host. You **CANNOT** currently send messages over the network to a different machine_
-
+<Callout type="warning">
+_XSOverlay **ONLY** listens for messages from the local host. You **CANNOT** currently send messages over the network to a different machine_
+</Callout>
 ***
-# API Object / Message Format
+## API Object / Message Format
 
 All WebSocket messages are sent as JSON objects. The following properties are available:
 
@@ -32,10 +31,12 @@ All WebSocket messages are sent as JSON objects. The following properties are av
 | `rawData` | string | Raw data payload with a singular value in string format like "true", "false", etc. This is mainly used by the UI to do things like setting settings, where the string will be parsed|
 
 ***
-# Connecting to the WebSocket
+## Connecting to the WebSocket
 A C# example of connecting to the XSOverlay WebSocket server. This is a C# example, but the same concept can be applied to any language that supports WebSocket and JSON serialization.
 
-!>_You must include `client` as a query string in your websocket url. If you do not, the connection will be ignored. e.g. we://host:port/?client=ClientName_
+<Callout type="warning">
+_You must include `client` as a query string in your websocket url. If you do not, the connection will be ignored. e.g. we://host:port/?client=ClientName_
+</Callout>
 
 ```cs copy filename="C#"
 static async Task Main(string[] args)
@@ -55,7 +56,7 @@ static async Task Main(string[] args)
 ```
 
 ***
-# Sending a command
+## Sending a command
 After connecting to the websocket, youll likely want to send a command. Below is an example of how to send a notification via the websocket API.
 See [API Commands](apicommands) for a list of api commands.
 
@@ -77,8 +78,10 @@ void foobar()
 }
 ```
 ***
-# Subscribing to Events
-!> _Note that subscription tag name is parsed from an enum internally. Spelling matters. Casing is ignored._
+## Subscribing to Events
+<Callout>
+_Note that subscription tag name is parsed from an enum internally. Spelling matters. Casing is ignored._
+</Callout>
 
 Some API events allow you to subscribe to them by passing an array of tags in the `jsonData` field in `XSOApiObject`.
 This is useful if you want to continuously get up-to-date information about something without sending a message each time you want an update.
