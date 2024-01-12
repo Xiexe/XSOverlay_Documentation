@@ -1,6 +1,4 @@
 {
-  "websocket": "Websockets API",
-  "oscApi": "OSC API",
-  "udpApi": "UDP API (Legacy)",
+  "api": "API",
   "soundpacks": "Soundpacks"
 }
