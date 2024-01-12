@@ -58,7 +58,7 @@ static async Task Main(string[] args)
 After connecting to the websocket, youll likely want to send a command. Below is an example of how to send a notification via the websocket API.
 See [API Commands](apicommands) for a list of api commands.
 
-```cs
+```cs copy filename="CSharp"
 void foobar()
 {
     XSONotificationObject notification = new XSONotificationObject(); // See WebsocketAPI / XSONotificationObject for more information
@@ -99,7 +99,7 @@ Below you will find a list of available subscription tags, what commands they wo
 | `Performance` | [RequestRuntimePerformance](apicommands#RequestRuntimePerformance) |
 
 ### Example
-```cs
+```cs copy filename="CSharp"
 void foobar()
 {
     List<string> tags = new List<string>()
