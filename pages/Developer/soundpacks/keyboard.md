@@ -16,7 +16,7 @@
 # Soundpack Settings
 !> `soundpackSettings.json` is a required element of the soundpack, and controls things like volume, and randomizing the pitch of the keyboard typing sounds.
 
-```json
+```json copy filename="json"
 {
     "settings": [
         {

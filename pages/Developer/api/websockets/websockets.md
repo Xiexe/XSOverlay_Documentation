@@ -19,7 +19,6 @@ The following options can be configured:
 !>_XSOverlay **ONLY** listens for messages from the local host. You **CANNOT** currently send messages over the network to a different machine_
 
 ***
-
 # API Object / Message Format
 
 All WebSocket messages are sent as JSON objects. The following properties are available:
@@ -32,13 +31,13 @@ All WebSocket messages are sent as JSON objects. The following properties are av
 | `jsonData` | string | JSON Payload with command specific data. See below for endpoint specific for endpoint message formats |
 | `rawData` | string | Raw data payload with a singular value in string format like "true", "false", etc. This is mainly used by the UI to do things like setting settings, where the string will be parsed|
 
-
+***
 # Connecting to the WebSocket
 A C# example of connecting to the XSOverlay WebSocket server. This is a C# example, but the same concept can be applied to any language that supports WebSocket and JSON serialization.
 
 !>_You must include `client` as a query string in your websocket url. If you do not, the connection will be ignored. e.g. we://host:port/?client=ClientName_
 
-```cs copy filename="CSharp"
+```cs copy filename="C#"
 static async Task Main(string[] args)
 {
       WebsocketPort = (args.Length == 0) ? 42070 : Int32.Parse(args[0]);
@@ -55,11 +54,12 @@ static async Task Main(string[] args)
 }
 ```
 
+***
 # Sending a command
 After connecting to the websocket, youll likely want to send a command. Below is an example of how to send a notification via the websocket API.
 See [API Commands](apicommands) for a list of api commands.
 
-```cs copy filename="CSharp"
+```cs copy filename="C#"
 void foobar()
 {
     XSONotificationObject notification = new XSONotificationObject(); // See WebsocketAPI / XSONotificationObject for more information
@@ -76,7 +76,7 @@ void foobar()
     ws.Send(JsonSerializer.Serialize(apiObject));
 }
 ```
-
+***
 # Subscribing to Events
 !> _Note that subscription tag name is parsed from an enum internally. Spelling matters. Casing is ignored._
 
@@ -84,6 +84,7 @@ Some API events allow you to subscribe to them by passing an array of tags in th
 This is useful if you want to continuously get up-to-date information about something without sending a message each time you want an update.
 Below you will find a list of available subscription tags, what commands they would map to, and an example of how to subscribe to those tags.
 
+***
 ### Subscription Tags
 | Tag Name | Event |
 | --- | --- |
@@ -99,8 +100,8 @@ Below you will find a list of available subscription tags, what commands they wo
 | `Settings` | [RequestGetSettings](apicommands#RequestGetSettings) |
 | `Performance` | [RequestRuntimePerformance](apicommands#RequestRuntimePerformance) |
 
-### Example
-```cs copy filename="CSharp"
+#### Example
+```cs copy filename="C#"
 void foobar()
 {
     List<string> tags = new List<string>()

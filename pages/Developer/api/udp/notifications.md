@@ -47,7 +47,7 @@ The following is the message object that is to be sent to XSOverlay Notification
 XSOverlay has an officially maintained [NuGet Package](https://www.nuget.org/packages/XSNotifications/) / [Github repository](https://github.com/nnaaa-vr/XSNotifications) for integrating the Notifications API easily into your C# applications.
 
 ## Code Samples
-```cs
+```cs copy filename="C#"
 //...
 using XSNotifications;
 using XSNotifications.Enum;
@@ -67,7 +67,7 @@ namespace NotificationExample1
 
 ***
 ## C# Manual Integration
-```cs
+```cs copy filename="C#"
 class Program
 {
     private struct XSOMessage
