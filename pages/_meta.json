@@ -1,6 +1,8 @@
 {
   "index": "Home",
+  "gettingstarted": "Getting Started",
   "commonissues": "Troubleshooting",
+  "debugging": "Debugging",
   "contact": {
     "title": "Contact ↗",
     "type": "page",
