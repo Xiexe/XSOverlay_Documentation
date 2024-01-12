@@ -1,13 +1,11 @@
+import {Callout} from 'nextra/components'
+
 # Common Issues
 The section below describes are some common issues that some users have encountered when using XSOverlay. 
 
 If this does not cover your issue or need additional assistance, please create an issue on [GitHub](https://github.com/Xiexe/XSOverlay-Issue-Tracker/issues/new?assignees=&labels=bug&template=bug_report.md&title=) or Join the [Discord](https://discord.gg/cqhZpytC89) and ask for help in the #bug-reports channel.
 
-
-
-# Troubleshooting
 This covers the following issues:
-	
 - XSOverlay opens briefly but then closes
 - XSOverlay is not displaying in game
 - XSOverlay is white/not displaying information
@@ -29,40 +27,31 @@ Previously, legacy users were required to run XSOverlay as administrator through
 
 ![Properties](/img/XSOverlayPropertiesMarkup.png "Properties")
 
+<Callout type="warning">
+I'm a Callout.
+</Callout>
 
 
 ## Anti-Virus & Firewall
 Sometimes anti-viruses detects false-positives when running XSOverlay and will prevent portions or the entirety of the application from operating. Configuration menus can differ from application to application, so refer to the manufacturer's documentation (or google) to ensure the proper steps are being applied correctly.
 
 ### Exceptions:
-Add exceptions for `XSOverlay.exe`, `XSOverlay-Node-Server.exe`, and `XSOverlayMediaManager.exe` to your firewall and antivirus software, by default it uses `TCP` ports `42070` and `42071` for communication. If you are using a custom port, ensure that you add an exception for that port as well.
+Add exceptions for `XSOverlay.exe`, and `XSOverlayMediaManager.exe` to your firewall and antivirus software, by default it uses `TCP` ports `42070` and `42071` for communication. If you are using a custom port, ensure that you add an exception for that port as well.
 
 All executables are found in the XSOverlay installation directory, which is typically located in your steam folder.
 
-<b>Main Executable</b>
-
+#### Main Executable
 This is the core of XSOverlay which is responsible to communicating to the other XSOverlay services:
 
 The executable is located in the root of the installation directory and is named `XSOverlay.exe`.
 This opens up `UDP` port `42069`, which is used for the Notification API.
 This also connects on `TCP` port `42070` by default, which is used to communicate with the node server.
 
-
-<b>Node Server</b>
-
-This is the service that is responsible for the UI.
-
-This is located in the `[XSOInstallDirectory]/StreamingAssets/Modules/Bridge/` directory and is named `XSOverlay-Node-Server.exe`.
-This also connects on `TCP` port `42070` and `42071` by default, which is used to communicate with the node server. See `Ports Bindings` below for more information.
-
-
-<b>Media Handler</b>
-
+#### Media Handler
 This is the service that is responsible for handling and managing media information and controls.
 
 This is located in the `[XSOInstallDirectory]/StreamingAssets/Modules/Media Manager/` directory and is named `XSOverlayMediaManager.exe`.
 This also connects on `TCP` port `42070` by default, which is used to communicate with the node server.
-
 
 
 ## Ports Bindings
