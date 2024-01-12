@@ -37,7 +37,8 @@ All WebSocket messages are sent as JSON objects. The following properties are av
 A C# example of connecting to the XSOverlay WebSocket server. This is a C# example, but the same concept can be applied to any language that supports WebSocket and JSON serialization.
 
 !>_You must include `client` as a query string in your websocket url. If you do not, the connection will be ignored. e.g. we://host:port/?client=ClientName_
-```cs
+
+```cs copy filename="CSharp"
 static async Task Main(string[] args)
 {
       WebsocketPort = (args.Length == 0) ? 42070 : Int32.Parse(args[0]);
