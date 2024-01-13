@@ -12,12 +12,12 @@ const config: DocsThemeConfig = {
 
   logo: <strong>XSOverlay Documentation</strong>,
   project: {
-    link: 'https://github.com/Xiexe/XSOverlayDocumentationVercel',
+    link: 'https://github.com/Xiexe/XSOverlay_Documentation',
   },
   chat: {
     link: 'https://discord.gg/WZm9H2BJU6',
   },
-  docsRepositoryBase: 'https://github.com/Xiexe/XSOverlayDocumentationVercel',
+  docsRepositoryBase: 'https://github.com/Xiexe/XSOverlay_Documentation/tree/main/'
 }
 
 export default config
