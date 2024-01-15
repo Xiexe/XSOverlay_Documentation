@@ -115,6 +115,47 @@ _Websocket notification format is slightly different from UDP notification forma
 ***
 ### RequestUpdateCursorCollisionTexture
 _Requests that the collision area for the panel be updated. Prevents cursor being visible on transparent parts of UI. May not update instantly._
+```cs copy filename="C#"
+void foobar()
+{
+    ulong overlayHandle = 0; // See RequestOverlayIDs command for information about how to get your overlay handle.
+
+    XSOApiObject apiObject = new XSOApiObject(); // See WebsocketAPI / XSOApiObject for more information
+    apiObject.sender = "xsoverlay";
+    apiObject.target = target;
+    apiObject.command = "RequestUpdateCursorCollisionTexture";
+    apiObject.jsonData = null;
+    apiObject.rawData = overlayHandle;
+
+    ws.Send(JsonSerializer.Serialize(apiObject));
+}
+```
+
+***
+### RequestUpdateOverlayCanvasSize
+_Requests that the canvas resolution for the overlay be updated to the requested resolution. May not update instantly._
+<Callout>
+_You will not need to manually update cursor collision. This command will handle that for you once the texture resolution has been updated._
+</Callout>
+
+```cs copy filename="C#"
+void foobar()
+{
+    ulong overlayHandle = 0; // See RequestOverlayIDs command for information about how to get your overlay handle.
+
+    XSOApiObject apiObject = new XSOApiObject(); // See WebsocketAPI / XSOApiObject for more information
+    apiObject.sender = "xsoverlay";
+    apiObject.target = target;
+    apiObject.command = "RequestUpdateOverlayCanvasSize";
+    apiObject.jsonData = "{
+        "width": int,
+        "height": int
+    }";
+    apiObject.rawData = overlayHandle;
+
+    ws.Send(JsonSerializer.Serialize(apiObject));
+}
+```
 
 ***
 ### SubscribeToEvents
