@@ -129,8 +129,7 @@ _Logs a message to the output log._
 ***
 ### RequestDateTime
 _Returns the current date and time, including session length, formatted based on User Setting_
-#### Return Object
-```json filename="json"
+```json filename="Return Object (JSON)"
 {
     "target" : "yourappname",
     "command": "UpdateDateTime",
@@ -144,8 +143,7 @@ _Returns the current date and time, including session length, formatted based on
 
 ### RequestThemeUpdate
 _Returns the current theme colors in hexadecimal_
-#### Return Object
-```json filename="json"
+```json filename="Return Object (JSON)"
 {
     "target" : "yourappname",
     "command": "UpdateTheme",
@@ -179,8 +177,8 @@ _This command uses the `rawData` field of `XSOApiObject` rather than the `jsonDa
 
     WebsocketClient.Send(JsonSerializer.Serialize(XSOAbiObject));
 ```
-#### Return Object
-```json filename="json"
+
+```json filename="Return Object (JSON)"
 {
     "target" : "yourappname",
     "command": "UpdateSteamAvatar",
@@ -192,8 +190,8 @@ _This command uses the `rawData` field of `XSOApiObject` rather than the `jsonDa
 ***
 ### RequestDeviceInformation 
 _Returns a list of devices and information about those devices_
-#### Return Object
-```json filename="json"
+
+```json filename="Return Object (JSON)"
 {
     "target" : "yourappname",
     "command": "UpdateDeviceInformation",
@@ -234,8 +232,8 @@ _Returns a list of devices and information about those devices_
 ***
 ### RequestLayoutModeState 
 _Returns the current open / closed state of Layout Mode_
-#### Return Object
-```json filename="json"
+
+```json filename="Return Object (JSON)"
 {
     "target" : "yourappname",
     "command": "UpdateLayoutModeState",
@@ -247,8 +245,8 @@ _Returns the current open / closed state of Layout Mode_
 ***
 ### RequestMediaPlayerUpdate 
 _Returns the current media information_
-#### Return Object
-```json filename="json"
+
+```json filename="Return Object (JSON)"
 {
     "target" : "yourappname",
     "command": "UpdateMediaPlayer",
@@ -265,8 +263,8 @@ _Returns the current media information_
 ***
 ### RequestGetSettings
 _Returns user settings for the overlay_
-#### Return Object
-```json filename="json"
+
+```json filename="Return Object (JSON)"
 {
     "target" : "yourappname",
     "command": "UpdateSettings",
@@ -365,8 +363,8 @@ _Returns user settings for the overlay_
 ***
 ### RequestUpdatedLanguageList 
 _Returns the list of possible languages_
-#### Return Object
-```json filename="json"
+
+```json filename="Return Object (JSON)"
 {
     "target" : "yourappname",
     "command": "UpdateLanguageList",
@@ -381,8 +379,8 @@ _Returns the list of possible languages_
 ***
 ### RequestUpdatedLanguageMap
 _Returns the map of strings for the currently selected language_
-#### Return Object
-```json filename="json"
+
+```json filename="Return Object (JSON)"
 {
     "target" : "yourappname",
     "command": "UpdateLanguageMap",
@@ -396,8 +394,8 @@ _Returns the map of strings for the currently selected language_
 ***
 ### RequestAchievementInformation 
 _Returns list of achievements with a boolean for unlocked / locked for the user._
-#### Return Object
-```json filename="json"
+
+```json filename="Return Object (JSON)"
 {
     "target" : "yourappname",
     "command": "UpdateAchievementStatus",
@@ -412,8 +410,8 @@ _Returns list of achievements with a boolean for unlocked / locked for the user.
 ***
 ### RequestWindowList 
 _Returns a list of capturable windows._
-#### Return Object
-```json filename="json"
+
+```json filename="Return Object (JSON)"
 {
     "target" : "yourappname",
     "command": "UpdateWindowList",
@@ -424,8 +422,8 @@ _Returns a list of capturable windows._
 ***
 ### RequestActiveOverlayInformation
 _Requests the current active overlay. This is the overlay that has ownership of the window toolbar_
-#### Return Object
-```json filename="json"
+
+```json filename="Return Object (JSON)"
 {
     "target" : "yourappname",
     "command": "UpdateActiveOverlayInformation",
@@ -449,7 +447,87 @@ _Requests the current active overlay. This is the overlay that has ownership of 
 ***
 ### RequestRuntimePerformance
 _Requests information about system resource usage, such as CPU, GPU, and Memory._
-#### Return Object
-```json
-// not implemented yet.
+
+```javascript filename="Hardware Type / Manufacterer IDs"
+const HardwareType = {
+    Generic: 0,
+    Gpu: 1,
+    Cpu: 2,
+    Memory: 3
+}
+
+const HardwareManufacterer = {
+    Nvidia: 0,
+    Amd: 1,
+    Intel: 2,
+    Generic: 3
+}
+```
+
+```json filename="Return Object (JSON)"
+{
+    "target" : "yourappname",
+    "command": "UpdateRuntimePerformance",
+    "jsonData": {
+        "CPU": {
+            "Type": int,
+            "Manufacterer": int,
+            "Name": string,
+            "Temperature": int,
+            "Load": int,
+            "MemLoad": int,
+            "MemSize": int
+        },
+        "GPU": {
+            "Type": int,
+            "Manufacterer": int,
+            "Name": string,
+            "Temperature": int,
+            "Load": int,
+            "MemLoad": int,
+            "MemSize": int
+        },
+        "Memory": {
+            "Type": int,
+            "Manufacterer": int,
+            "Name": string,
+            "Temperature": int,
+            "Load": int,
+            "MemLoad": int,
+            "MemSize": int
+        },
+        "Frametime": float,
+        "Framerate": int
+    }
+}
+```
+
+***
+### RequestOverlayIDs
+_Sometimes, you might want to change something about the overlay that you are currently rendering on, or about another overlay that exists in the OpenVR scene._
+_This command will allow you to do that by getting a map back which allows you to reference the overlay by it's handle with further commands._
+
+_If you are a webapp and have an overlay, to figure out which overlay handle you're rendering on, just access the jsonData property as an array with your URL location._
+
+```javascript filename="Example.js"
+Api.Client.Socket.addEventListener('message', function message(data) {
+   var decoded = Api.Parse(data);
+    switch (decoded.Command) {
+        case 'UpdateOverlayIDs':
+            console.log(`Current Overlay ID for ${window.location.href} : ${decoded.JsonData[window.location.href]}`);
+            break;
+    }
+});
+```
+
+```json filename="Return Object (JSON)"
+{
+    "target" : "yourappname",
+    "command": "UpdateOverlayIDs",
+    "jsonData": {
+        "overlayPageURL" : ulong,
+        "anotherOverlayPageURL" : ulong
+        // ... more entries ...
+    }
+}
 ```
