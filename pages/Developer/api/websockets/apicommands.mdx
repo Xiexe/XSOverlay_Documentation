@@ -474,8 +474,8 @@ const HardwareManufacterer = {
             "Manufacterer": int,
             "Name": string,
             "Temperature": int,
-            "Load": int,
-            "MemLoad": int,
+            "Load": int, // Used for device utilization, e.g. GPU / CPU Usage.
+            "MemLoad": int, // Used for memory utilization, like VRAM / RAM.
             "MemSize": int
         },
         "GPU": {
@@ -483,8 +483,8 @@ const HardwareManufacterer = {
             "Manufacterer": int,
             "Name": string,
             "Temperature": int,
-            "Load": int,
-            "MemLoad": int,
+            "Load": int, // Used for device utilization, e.g. GPU / CPU Usage.
+            "MemLoad": int, // Used for memory utilization, like VRAM / RAM.
             "MemSize": int
         },
         "Memory": {
@@ -492,14 +492,14 @@ const HardwareManufacterer = {
             "Manufacterer": int,
             "Name": string,
             "Temperature": int,
-            "Load": int,
-            "MemLoad": int,
+            "Load": int, // Used for device utilization, e.g. GPU / CPU Usage.
+            "MemLoad": int, // Used for memory utilization, like VRAM / RAM.
             "MemSize": int
         },
-        "Frametime": float,
-        "Framerate": int,
-        "MaxFrametime": float,
-        "MaxFramerate": int
+        "Frametime": float, // Current time in ms between the previous frame and this frame.
+        "Framerate": int, // Current framerate in Frames Per Second
+        "MaxFrametime": float, // Maximum frametime based on Headset Refresh Rate in ms e.g. 90hz = 11.1ms
+        "MaxFramerate": int // Equal to HMD Refresh Rate
     }
 }
 ```
