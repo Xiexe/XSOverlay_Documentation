@@ -85,6 +85,21 @@ _Sets a setting on the currently active overlay._
 _Requests to show a tooltip._
 
 ***
+### PlayDeviceHaptics
+_Allows you to play haptic feedback on a device._
+
+```json filename="Haptics Object"
+{
+    "deviceId": string, // Accepts int or "leftcontroller" / "rightcontroller"
+    "duration": int // in microseconds? milliseconds? ask valve idk
+}
+```
+
+```javascript filename="Example.js"
+    Api.Send(Api.Commands.PlayDeviceHaptics, JSON.stringify(new Api.HapticsObject('deviceId', 500)));
+```
+
+***
 ### OpenSteamVRBindings
 _Opens the SteamVR Binding Dashboard Page for XSO_
 
