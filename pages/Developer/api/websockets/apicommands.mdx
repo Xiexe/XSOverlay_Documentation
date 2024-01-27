@@ -211,8 +211,8 @@ _Returns the current theme colors in hexadecimal_
         "ErrorTone": string,
         "WarningTone": string,
         "ConfirmTone": string,
-        "AccentTone": string,
-        "AccentHiTone": string
+        "AccentColor": string,
+        "AccentColorBright": string
     }
 }
 ```
@@ -261,11 +261,11 @@ _Returns a list of devices and information about those devices_
                 "lastBatteryUpdate": string, // ISO-8601 Time 
                 "connection": int, // connection status
                 "charging": bool, // charging status
-                "battery": int, // 0-100 battery life
+                "battery": float, // 0-100 battery life
                 "label": string, // shorthand label
                 "name": string, // SteamVR device name
                 "timeEstimate": string, // estimated time remaining
-                "runningBatterySecondsPerPecent": [ // How long in seconds it took for 1% battery to drain. Running list, contains last 5% drain.
+                "runningBatterySecondsPerPercent": [ // How long in seconds it took for 1% battery to drain. Running list, contains last 5% drain.
                     float,
                     float,
                     float,
