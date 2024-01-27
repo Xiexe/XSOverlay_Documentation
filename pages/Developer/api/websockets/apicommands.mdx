@@ -471,7 +471,20 @@ _Returns a list of capturable windows._
 {
     "target" : "yourappname",
     "command": "UpdateWindowList",
-    "jsonData": {}
+    "jsonData": {
+          "0": {
+                "id": int,
+                "title": string,
+                "icon": string, // base64 icon image
+                "windowPreview": string, // base64 preview image. Currently not used.
+                "appName": string,
+                "isDesktop": bool,
+                "isPrimaryDesktop": bool,
+                "isUWP": bool,
+                "isSystem": bool
+            }
+            // ... more entries ...
+    }
 }
 ```
 
@@ -504,7 +517,7 @@ _Requests the current active overlay. This is the overlay that has ownership of 
 ### RequestRuntimePerformance
 _Requests information about system resource usage, such as CPU, GPU, and Memory._
 
-```javascript filename="Hardware Type / Manufacterer IDs"
+```javascript filename="Hardware Type / Manufacturer IDs"
 const HardwareType = {
     Generic: 0,
     Gpu: 1,
@@ -512,7 +525,7 @@ const HardwareType = {
     Memory: 3
 }
 
-const HardwareManufacterer = {
+const HardwareManufacturer = {
     Nvidia: 0,
     Amd: 1,
     Intel: 2,
@@ -527,7 +540,7 @@ const HardwareManufacterer = {
     "jsonData": {
         "CPU": {
             "Type": int,
-            "Manufacterer": int,
+            "Manufacturer": int,
             "Name": string,
             "Temperature": int,
             "Load": int, // Used for device utilization, e.g. GPU / CPU Usage.
@@ -536,7 +549,7 @@ const HardwareManufacterer = {
         },
         "GPU": {
             "Type": int,
-            "Manufacterer": int,
+            "Manufacturer": int,
             "Name": string,
             "Temperature": int,
             "Load": int, // Used for device utilization, e.g. GPU / CPU Usage.
@@ -545,7 +558,7 @@ const HardwareManufacterer = {
         },
         "Memory": {
             "Type": int,
-            "Manufacterer": int,
+            "Manufacturer": int,
             "Name": string,
             "Temperature": int,
             "Load": int, // Used for device utilization, e.g. GPU / CPU Usage.
