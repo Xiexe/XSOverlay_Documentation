@@ -542,33 +542,33 @@ const HardwareManufacturer = {
             "Type": int,
             "Manufacturer": int,
             "Name": string,
-            "Temperature": int,
-            "Load": int, // Used for device utilization, e.g. GPU / CPU Usage.
-            "MemLoad": int, // Used for memory utilization, like VRAM / RAM.
-            "MemSize": int
+            "Temperature": float,
+            "Load": float, // Used for device utilization, e.g. GPU / CPU Usage.
+            "MemLoad": float, // Used for memory utilization, like VRAM / RAM.
+            "MemSize": float
         },
         "GPU": {
             "Type": int,
             "Manufacturer": int,
             "Name": string,
-            "Temperature": int,
-            "Load": int, // Used for device utilization, e.g. GPU / CPU Usage.
-            "MemLoad": int, // Used for memory utilization, like VRAM / RAM.
-            "MemSize": int
+            "Temperature": float,
+            "Load": float, // Used for device utilization, e.g. GPU / CPU Usage.
+            "MemLoad": float, // Used for memory utilization, like VRAM / RAM.
+            "MemSize": float
         },
         "Memory": {
             "Type": int,
             "Manufacturer": int,
             "Name": string,
-            "Temperature": int,
-            "Load": int, // Used for device utilization, e.g. GPU / CPU Usage.
-            "MemLoad": int, // Used for memory utilization, like VRAM / RAM.
-            "MemSize": int
+            "Temperature": float,
+            "Load": float, // Used for device utilization, e.g. GPU / CPU Usage.
+            "MemLoad": float, // Used for memory utilization, like VRAM / RAM.
+            "MemSize": float
         },
         "Frametime": float, // Current time in ms between the previous frame and this frame.
-        "Framerate": int, // Current framerate in Frames Per Second
+        "Framerate": float, // Current framerate in Frames Per Second
         "MaxFrametime": float, // Maximum frametime based on Headset Refresh Rate in ms e.g. 90hz = 11.1ms
-        "MaxFramerate": int // Equal to HMD Refresh Rate
+        "MaxFramerate": float // Equal to HMD Refresh Rate
     }
 }
 ```
