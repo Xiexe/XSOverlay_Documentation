@@ -1,4 +1,4 @@
 {
   "websockets": "Websockets",
-  "udp": "UDP (Legacy)"
+  "legacy_udp": "UDP (Legacy)"
 }

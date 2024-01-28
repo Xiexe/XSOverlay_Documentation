@@ -22,7 +22,7 @@ _Layout mode toolbar create button, creates an overlay._
 
 ***
 ### Recenter
-_Layout mode toolbar recenter button, Recenters the overlay space._
+_Layout mode toolbar recenter button, Re-centers the overlay space._
 
 ***
 ### Keyboard
@@ -46,7 +46,7 @@ _Layout mode toolbar grid view button._
 
 ***
 ### MediaPlayPause
-_Toggles play / pause on media player_
+_Plays/Pauses the media player._
 
 ***
 ### MediaPrevious
@@ -71,14 +71,43 @@ _Deletes the overlay that has ownership of the window toolbar._
 ***
 ### UpdateMediaPlayerInformation
 _Updates the media player information with an XSOMediaObject._
+```json filename="XSOMediaObject Object"
+{
+    "title": string, 
+    "album": string, 
+    "artist": string, 
+    "albumArt": string, // base64 encoded image
+    "applicationName": string, // spotify, youtube, etc
+    "playbackStatus": string // "playing" or "paused" 
+}
+```
 
 ***
 ### SetXSOverlaySystemSetting
-_Sets a user settings._
+_Sets a user settings. You can find the names in the settings and what they do with the GetSettings return object._
+```json filename="Setting Object"
+{
+    "internalName": string,
+    "value": object // type depends on setting
+}
+```
 
 ***
 ### SetActiveOverlaySetting
-_Sets a setting on the currently active overlay._
+_Sets a setting on the currently active overlay. Utilizes the setting object. Each overlay has these options._
+
+| Property | Type | Description | 
+| --- | --- | --- |
+| `pin` | `bool` | When enabled, the overlay is pinned. |
+| `autoHide` | `bool` | When enabled, the overlay will auto hide when not within the clipping angle |
+| `lock` | `bool` | When enabled, the overlay lock and will not be able to be moved or adjusted |
+| `opacity` | `float` | Opacity of the overlay, between 0 and 1 |
+| `blockInput` | `bool` | When enabled, the overlay will not accept inputs.|
+| `brightness` | `float` | Brightness of the overlay, between 0 and 1 |
+| `maxFPS` | `int` | Maximum FPS of the overlay when not active |
+| `minFPS` | `int` | Minimum FPS of the overlay when not active |
+| `trackingSpace` | `int` |  This could be mixed (0), head (1), or hand (2). |
+| `captureSelect` | `int` |This is either Windows Game Capture (0) or BitBlt (1). |
 
 ***
 ### RequestShowTooltip
@@ -91,7 +120,7 @@ _Allows you to play haptic feedback on a device._
 ```json filename="Haptics Object"
 {
     "deviceId": string, // Accepts int or "leftcontroller" / "rightcontroller"
-    "duration": int // in microseconds? milliseconds? ask valve idk
+    "duration": int // in milliseconds
 }
 ```
 
@@ -325,93 +354,100 @@ _Returns user settings for the overlay_
     "target" : "yourappname",
     "command": "UpdateSettings",
     "jsonData": {
-        "VersionNumber": int,
-        "KeyboardSoundpackName": string,
-        "KeyboardSoundpackIndex": int,
-        "ForceJISKeyboard": bool,
-        "KeyboardFormat": int,
-        "KeyboardOpacity": float,
-        "KeyboardTypingSounds": bool,
-        "WristOffsets": {
-            "x": float,
-            "y": float,
-            "z": float
-        },
-        "WristRotation": {
-            "x": float,
-            "y": float,
-            "z": float
-        },
-        "WristScale": float,
-        "DominantHand": int,
-        "Language": int,
-        "LanguageURL": string,
-        "InputMethod": int,
-        "AutomaticMouseControl": bool,
-        "DoubleClickDelay": float,
-        "DiscordRichPresence": bool,
-        "LowBatterySound": bool,
-        "LowBatteryWarningPercent": int,
-        "HapticsStrength": float,
-        "HideTooltips": bool,
-        "PointerScale": float,
-        "CaptureMethod": int,
-        "ShowWindowPreviews": bool,
-        "CurvedOverlays": bool,
-        "AutoRecenter": bool,
-        "InvertScaleGesture": bool,
-        "OverlayCurveBias": float,
-        "OverlayClipAngle": int,
-        "OverlayDefaultScale": float,
-        "OverlayDefaultOpacity": float,
-        "OverlayDefaultMinFPS": int,
-        "OverlayDefaultMaxFPS": int,
-        "AimTarget": int,
-        "AimAtTarget": bool,
-        "GrabSensitivity": float,
-        "PushSpeed": float,
-        "ScaleSpeed": float,
-        "PositionDampening": int,
-        "RotationDampening": int,
-        "SmartRollAngle": int,
-        "AllowWristMovement": bool,
-        "HideWristOverlay": bool,
-        "WristOpacity": float,
-        "WristClipAngle": int,
-        "ContinentalTimeFormat": bool,
-        "DateFormat": int,
-        "AutoMediaDetection": bool,
-        "MediaThemeing": bool,
-        "AlwaysShowDetailedInformation": bool,
-        "DefaultShowBatteryPercentage": bool,
-        "BatteryFontScale": int,
-        "UseDarkTheme": bool,
-        "AdaptiveColor": float,
-        "AccentColor": {
-            "r": float,
-            "g": float,
-            "b": float,
-            "a": float
-        },
-        "NotificationScale": float,
-        "NotificationOffsets": {
-            "x": float,
-            "y": float,
-            "z": float
-        },
-        "ForceHigherQualityOverlays": bool,
-        "BlockInputToBackgroundApplication": bool,
-        "InputBlockingBehavior": int,
-        "NightLight": bool,
-        "NightLightStartHour": int,
-        "NightLightEndHour": int,
-        "NightLightStartAMPM": bool,
-        "NightLightEndAMPM": bool,
-        "NightLightIntensity": float,
-        "NightLightSchedule": bool,
-        "AllowAdminPermissions": bool,
-        "UUID": string,
-        "SendAnalytics": bool
+          "AccentColor":  // Represents the theme accent color.
+          {
+                "r": float, // red
+                "g": float, // green
+                "b": float, // blue
+                "a": float // No longer used.
+          },
+          "AdaptiveColor": float, // Represents how much mix the accent color into the primary theme color. This is between 0 and 1.
+          "AimAtTarget": bool, // When enabled, this will aim the overlay at the target when holding it.
+          "AimTarget": int, // Represents the target an overlay will aim at when holding it. This could be mixed (0), head (1), or hand (2). AimAtTarget must be enabled for this to work.
+          "AllowAdminPermissions": bool, // When enabled, XSOverlay will be granted admin permissions.
+          "AllowWristMovement": bool, // When enabled, this will allow the wrist overlay to be moved.
+          "AlwaysShowDetailedInformation": bool, // When enabled, the wrist battery widget will always show battery percentage and time remaining.
+          "AutoMediaDetection": bool, // When enabled, XSOverlay will automatically detect media playing.
+          "AutoRecenter": bool, // When enabled, XSOverlay will automatically re-center when layout mode opens.
+          "AutomaticMouseControl": bool, // When enabled, the mouse cursor automatically moves with the VR Cursor, or if an input is required first.
+          "BatteryFontScale": int, // Represents the font-size for the battery widget.
+          "BlockInputToBackgroundApplication": bool, // When enabled, XSOverlay will attempt to block input to the background application.
+          "CaptureMethod": int, // Represents the capture method of the overlay. This is either Windows Game Capture (0) or BitBlt (1).
+          "ContinentalTimeFormat": bool, // When enabled, the time format will be in 24 hour format.
+          "CurvedOverlays": bool, // When enabled, this allows overlay windows to be curved.
+          "DateFormat": int, // Represents the date format. This could be MM/DD/YYYY (0), DD/MM/YYYY (1).
+          "DefaultShowBatteryPercentage": bool, // When enabled, the wrist battery widget will always show battery percentage instead of time remaining.
+          "DiscordRichPresence": bool, // When enabled, XSOverlay will communicate to discord what you are playing.
+          "DoubleClickDelay": float, // Represents the amount of time in milliseconds after a click that the cursor will freeze in place to allow for easier double-clicking.
+          "DominantHand": int, // Dominant Hand. This would be left (0) or right (1).
+          "ForceHigherQualityOverlays": bool, // When enabled, this will force overlays to be rendered at a higher resolution.
+          "ForceJISKeyboard": bool, // When enabled, the keyboard is forced into JIS layout.
+          "GrabSensitivity": float, // Represents the sensitivity of the grab gesture. This is between 0 (light) and 1 (hard).
+          "HapticsStrength": float, // Represents the haptics strength when interacting with XSOverlay. This is between 0 and 1.
+          "HideTooltips": bool, // When enabled, this hides tooltips.
+          "HideWristOverlay": bool, // [Obsolete] This setting is no longer used. However, it is still here for backwards compatibility.
+          "InputBlockingBehavior": int, // Represents the input blocking behavior. Chose between 'blocking when layout mode is open' (0) or 'blocking when hovering over an overlay' (1).
+          "InputMethod": int, // Represents the input method of the cursor when interacting with devices. This would be touch (0) or mouse emulation (1).
+          "InvertScaleGesture": bool, // When enabled, this will invert the scaling direction when scaling the overlay.
+          "KeyboardFormat": int, // Format of the keyboard (minimal, half size, full).
+          "KeyboardOpacity": float, // The opacity of the keyboard, between 0 and 1.
+          "KeyboardSoundpackIndex": int, // Index to the currently loaded keyboard sound pack.
+          "KeyboardSoundpackName": string, // Name of the currently loaded Keyboard sound pack.
+          "KeyboardTypingSounds": bool, // When enabled, the keyboard typing noises are on.
+          "Language": int, // Index of the currently selected language.
+          "LanguageURL": string, // The path to the currently selected language on the system.
+          "LowBatterySound": bool, // When enabled, XSOverlay will play a sound when the battery is low.
+          "LowBatteryWarningPercent": int, // Represents the threshold of battery percentage that will trigger a low battery warning. This is between 0 and 100.
+          "MediaThemeing": bool, // When enabled, XSOverlay will adjust the theme based on the playing media's album art.
+          "NightLight": bool, // Represents the behavior of the night-light which can apply a red-ish hue to the overlays during select hours (true) or all time (false).
+          "NightLightEndAMPM": bool, // When enabled, the night light cycle will end at PM, otherwise it will start at AM.
+          "NightLightEndHour": int, // Represents the ending hour of the night light cycle.
+          "NightLightIntensity": float, // Represents the intensity of the night light. This is between 0 and 1.
+          "NightLightSchedule": bool, // When enabled, the night light will follow a schedule.
+          "NightLightStartAMPM": bool, // When enabled, the night light cycle will start at PM, otherwise it will start at AM.
+          "NightLightStartHour": int, // Represents the starting hour of the night light cycle.
+          "NotificationOffsets": // Represents the notification offset relative to local space to the hmd.
+          {
+              "x": float,
+              "y": float,
+              "z": float
+          }, 
+          "NotificationScale": float, // Represents the notification scale. This is between 0 and 1.
+          "OverlayClipAngle": int, // Represents the clip angle to auto-hide overlays when not looking at them. Auto-hide must be enabled for this to work.
+          "OverlayCurveBias": float, // Represents the control strength of the overlay curving.
+          "OverlayDefaultMaxFPS": int, // Represents the default maximum FPS of a newly created overlay overlay.
+          "OverlayDefaultMinFPS": int, // Represents the default minimum FPS of a newly created overlay overlay.
+          "OverlayDefaultOpacity": float, // Represents the default opacity of the overlay when it is created. This is between 0 and 1.
+          "OverlayDefaultScale": float, // Represents the default scale of the overlay when it is created. This is between 0 and 1.
+          "OverlayOpacity": float, // Represents the opacity of the overlay. This is between 0 and 1.
+          "OverlayScale": float, // Represents the scale of the overlay. This is between 0 and 1.
+          "PointerScale": float, // Represents the scale of the pointer. This is between 0 and 1.
+          "PositionDampening": int, // Represents the reaction speed when an overlay adjusts its position when moving around. This is between 0 and 1.
+          "PushSpeed": float, // Represents the speed of pushing/pulling an overlay. This is between 0 (slow) and 1 (fast).
+          "RotationDampening": int, // Represents the reaction speed when an overlay adjusts its position when moving around. This is between 0 and 1.
+          "ScaleSpeed": float, // Represents the speed of scaling an overlay. This is between 0 (slow) and 1 (fast).
+          "SendAnalytics": bool, // When enabled, the anonymous analytics will be sent.
+          "ShowWindowPreviews": bool, // [Obsolete] This setting is no longer used. However, it is still here for backward compatibility.
+          "SmartRollAngle": int, // Represents the angle your head needs relative to the space overlay to adapt to being sideways. (I.E. For Laying down).
+          "UUID": string, // UUID of the user. This is an anonymous identifier used for analytics.
+          "UseDarkTheme": bool, // When enabled, XSOverlay will use the dark theme.
+          "VersionNumber": int, // Version Number.
+          "WristClipAngle": int, // Represents the clip angle to auto-hide the wrist overlay when not looking at it.
+          "WristOffsets": // Represents the wrist overlay position in local space. This is relative to the device it's attached to.
+          {
+              "x": float, // X Positional offset
+              "y": float, // Y Positional offset
+              "z": float  // Z Positional offset
+          },
+          "WristOpacity": float, // Represents the opacity of the wrist overlay. This is between 0 and 1.
+          "WristRotation":// Represents the wrist overlay rotation, in euler angles, in local space. This is relative to the device it's attached to.
+          { 
+                "x": float, // X Euler Rotation
+                "y": float, // Y Euler Rotation
+                "z": float  // Z Euler Rotation
+          }, 
+          "WristScale": float // Wrist overlay scale.
+        }
     }
 }
 ```
@@ -465,7 +501,7 @@ _Returns list of achievements with a boolean for unlocked / locked for the user.
 
 ***
 ### RequestWindowList 
-_Returns a list of capturable windows._
+_Returns a list of windows that can be captured._
 
 ```json filename="Return Object (JSON)"
 {
