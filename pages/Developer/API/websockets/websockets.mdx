@@ -4,7 +4,6 @@ import { Callout } from 'nextra/components'
 
 XSOverlay has a WebSocket based API for interacting with the Notifications, SteamVR, and the overlay itself.
 
-***
 ## Configuration
 
 XSOverlay, by default, is configured to listen for WebSocket messages on port `42070`. This can be changed by editing the `ExternalMessageAPIConfig.json` file located in the `[XSOverlayInstallDirectory]/XSOverlay_Data/StreamingAssets/Plugins/Config/` directory.
@@ -32,7 +31,6 @@ All WebSocket messages are sent as JSON objects. The following properties are av
 | `jsonData` | string | JSON Payload with command specific data. See below for endpoint specific for endpoint message formats |
 | `rawData` | string | Raw data payload with a singular value in string format like "true", "false", etc. This is mainly used by the UI to do things like setting settings, where the string will be parsed|
 
-***
 ## Connecting to the WebSocket
 A C# example of connecting to the XSOverlay WebSocket server. This is a C# example, but the same concept can be applied to any language that supports WebSocket and JSON serialization.
 
@@ -57,7 +55,6 @@ static async Task Main(string[] args)
 }
 ```
 
-***
 ## Sending a command
 After connecting to the websocket, youll likely want to send a command. Below is an example of how to send a notification via the websocket API.
 See [API Commands](apicommands) for a list of api commands.
@@ -79,7 +76,7 @@ void foobar()
     ws.Send(JsonSerializer.Serialize(apiObject));
 }
 ```
-***
+
 ## Subscribing to Events
 <Callout>
 _Note that subscription tag name is parsed from an enum internally. Spelling matters. Casing is ignored._
@@ -89,7 +86,7 @@ Some API events allow you to subscribe to them by passing an array of tags in th
 This is useful if you want to continuously get up-to-date information about something without sending a message each time you want an update.
 Below you will find a list of available subscription tags, what commands they would map to, and an example of how to subscribe to those tags.
 
-***
+ 
 ### Subscription Tags
 | Tag Name | Event |
 | --- | --- |
@@ -125,3 +122,6 @@ void foobar()
     ws.Send(JsonSerializer.Serialize(apiObject));
 }
 ```
+
+## Unsubscribing to Events
+Unsubscribing to events is the same as subscribing, except you send the `UnsubscribeToEvents` command instead of `SubscribeToEvents`.
