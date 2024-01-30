@@ -141,7 +141,6 @@ _Websocket notification format is slightly different from UDP notification forma
 
 ![Notification Markup](img/notification/NotificationMarkup.png)
 
-```cs copy filename="C#"
 #### Websocket Notification Object
 | Property | Type | Description | Default Value |
 | --- | --- | --- | --- |
@@ -157,6 +156,24 @@ _Websocket notification format is slightly different from UDP notification forma
 | `useBase64Icon` | `bool` | Set to true if using Base64 for the icon image. | `false` |
 | `icon` | `string` | Base64 Encoded image, or file path to image. Can also be "default", "error", or "warning". | `""` |
 | `sourceApp` | `string` | Somewhere to put your app name for debugging purposes. | `""` |
+
+```cs copy filename="C#"
+void foobar()
+{
+    XSONotificationObject notification = new XSONotificationObject(); // See WebsocketAPI / XSONotificationObject for more information
+    notification.title = "woah its an example!";
+    notification.type = 1;
+
+    XSOApiObject apiObject = new XSOApiObject(); // See WebsocketAPI / XSOApiObject for more information
+    apiObject.sender = "xsoverlay";
+    apiObject.target = target;
+    apiObject.command = "SendNotification";
+    apiObject.jsonData = JsonSerializer.Serialize(notification);
+    apiObject.rawData = null;
+
+    ws.Send(JsonSerializer.Serialize(apiObject));
+}
+```
 
 ***
 ### RequestUpdateCursorCollisionTexture
