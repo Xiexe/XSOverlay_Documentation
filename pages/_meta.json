@@ -1,8 +1,8 @@
 {
   "index": "Home",
   "gettingstarted": "Getting Started",
-  "settings": "Global Settings",
   "overlaysettings": "Overlay Settings",
+  "settings": "Global Settings",
   "commonissues": "Troubleshooting",
   "debugging": "Debugging",
   "contact": {
