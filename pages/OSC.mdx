@@ -1,6 +1,6 @@
 ﻿import { Callout } from 'nextra/components'
 
-OSC (Open Sound Control) is a protocol used for communicating between applications. XSOverlay, by default, is configured to send OSC messages on port `9000`. XSOverlay does not listen for OSC messages.  This can be changed by editing
+OSC (Open Sound Control) is a protocol used for communicating between applications. XSOverlay, by default, is configured to send OSC messages on port `9000`. XSOverlay does not listen for OSC messages.
 This can be changed by editing the `ExternalMessageAPIConfig.json` file located in the `[XSOverlayInstallDirectory]/XSOverlay_Data/StreamingAssets/Plugins/Config/` directory.
 
 
@@ -27,9 +27,9 @@ The following OSC parameters are sent by XSOverlay:
 | `rightControllerBattery` | Right Controller Battery Percentage (Range: 0 - 1) | Float |
 | `averageControllerBattery` | Average Controller Battery Percentage (Range: 0 - 1) | Float |
 | `averageTrackerBattery` | Average Tracker Battery Percentage (Range: 0 - 1) | Float |
-| `isOverlayOpen` | Is `true` the overlay is open. When closed this parameter is `false` | Boolean |
-| `isKeyboardOpen` | Is `true` the keyboard is open. When closed this parameter is `false` | Boolean |
-| `isWristVisible` | Is `true` the wrist menu is visible. When wrist menu is not visible this parameter is `false` | Boolean |
+| `isOverlayOpen` | Is `true` when the overlay is open. When closed this parameter is `false` | Boolean |
+| `isKeyboardOpen` | Is `true` when the keyboard is open. When closed this parameter is `false` | Boolean |
+| `isWristVisible` | Is `true` when the wrist menu is visible. When the wrist menu is not visible this parameter is `false` | Boolean |
 | `openOverlayCount` | The number over overlays open (Range: 0 - 255) | Integer |
 
 For more information on the OSC protocol and how to integrate it to your application, please refer to the [OSC Documentation](https://opensoundcontrol.org/introduction-osc).
