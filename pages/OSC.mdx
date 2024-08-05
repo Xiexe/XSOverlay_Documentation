@@ -1,0 +1,35 @@
+﻿import { Callout } from 'nextra/components'
+
+OSC (Open Sound Control) is a protocol used for communicating between applications. XSOverlay, by default, is configured to send OSC messages on port `9000`. XSOverlay does not listen for OSC messages.  This can be changed by editing
+This can be changed by editing the `ExternalMessageAPIConfig.json` file located in the `[XSOverlayInstallDirectory]/XSOverlay_Data/StreamingAssets/Plugins/Config/` directory.
+
+
+### OSC Configuration
+
+| Option | Description | Default Value |
+| --- | --- | --- |
+| `OscSendPort` | The port XSOverlay sends to OSC messages on. | `9000` |
+| `OscListenPort` | The port XSOverlay listens to OSC messages on (UNUSED). | `9001` |
+| `OscOutputPath` | The base OSC address that is appended on each parameter. | `/avatar/parameters/` |
+
+Changes to this file will require a restart of XSOverlay to take effect.
+
+<Callout>
+    You will likely need to use a port number between `20000` and `49150`. It is not advised to configure XSOverlay to use ports outside of this range as it conflict with ports allocated to your operating system or subsystem services
+</Callout>
+
+### OSC Parameters
+
+The following OSC parameters are sent by XSOverlay:
+| Parameter | Description | Type |
+| --- | --- | --- |
+| `leftControllerBattery` | Left Controller Battery Percentage (Range: 0 - 1) | Float |
+| `rightControllerBattery` | Right Controller Battery Percentage (Range: 0 - 1) | Float |
+| `averageControllerBattery` | Average Controller Battery Percentage (Range: 0 - 1) | Float |
+| `averageTrackerBattery` | Average Tracker Battery Percentage (Range: 0 - 1) | Float |
+| `isOverlayOpen` | Is `true` the overlay is open. When closed this parameter is `false` | Boolean |
+| `isKeyboardOpen` | Is `true` the keyboard is open. When closed this parameter is `false` | Boolean |
+| `isWristVisible` | Is `true` the wrist menu is visible. When wrist menu is not visible this parameter is `false` | Boolean |
+| `openOverlayCount` | The number over overlays open (Range: 0 - 255) | Integer |
+
+For more information on the OSC protocol and how to integrate it to your application, please refer to the [OSC Documentation](https://opensoundcontrol.org/introduction-osc).

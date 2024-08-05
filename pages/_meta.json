@@ -5,6 +5,7 @@
   "settings": "Global Settings",
   "commonissues": "Troubleshooting",
   "debugging": "Debugging",
+  "OSC": "OSC",
   "contact": {
     "title": "Contact ↗",
     "type": "page",
