@@ -9,6 +9,7 @@ This covers the following issues:
 - XSOverlay opens briefly but then closes
 - XSOverlay is not displaying in game
 - XSOverlay is white/not displaying information
+- Broken interactivity in rare cases
 
 
 ## Administrator Rights
@@ -67,5 +68,15 @@ For example, if set to port `40000`, the app will hook port `40000` and `40001` 
 <Callout>
 You will likely need to use a port number between `20000` and `49150`. It is not advised to configure XSOverlay to use ports outside of this range as it conflict with ports allocated to your operating system or subsystem services 
 </Callout>
- 
 
+## Vuplex.WebView Cache
+
+In rare cases some interfaces and interactivity is broken due to Vuplex webview rendering. This can be resolved by clearing the cache. 
+
+While XSOverlay is closed, navigate to the following directory in File Explorer:
+
+`C:\Users\%USERPROFILE%\AppData\LocalLow\Xiexe\XSOverlay\`
+
+Delete the `Vuplex.WebView` directory and launch XSOverlay.
+
+![Cache](../img/XSOCache.png "Cache")
