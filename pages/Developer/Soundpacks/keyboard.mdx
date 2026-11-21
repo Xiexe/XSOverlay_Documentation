@@ -1,38 +1,37 @@
 import { Callout } from 'nextra/components'
 
-# Keyboard Soundpacks
+# Keyboard Sound Packs
 <Callout>
-_Keyboard Soundpacks are located at `[XSOverlayInstallationDirectory]/XSOverlay_Data/StreamingAssets/Plugins/KeyboardSounds/`_
+_Keyboard sound packs are located in `[XSOverlay install]/XSOverlay_Data/StreamingAssets/Plugins/KeyboardSounds/`_
 </Callout>
 
 ***
 
-## Creating Soundpacks
+## Creating Sound Packs
 <Callout type="info">
 **Requirements**
-    - _Audio files must be `.ogg` format._
-    - _Audio files must be named `backspace`, `enter`, `spacebar`, and `tap` respectively._
+    - _Audio files must be named `backspace.ogg`, `enter.ogg`, `spacebar.ogg` and `tap.ogg`._
     - _You must include a `soundpackSettings.json` configuration file._
 </Callout>
-To create a sound pack, follow the rules above, and place the files into a new folder under the `KeyboardSounds` directory. You can then access the soundpack by hitting the keyboard settings button, and loading it from the list.
+To create a sound pack, place these files in a new folder under the `KeyboardSounds` directory. Then choose it in Settings › Keyboard › [Sound Pack](/settings/keyboard#sound-pack).
 
 ***
 
-## Soundpack Settings
+## Sound Pack Settings
 <Callout type="warning">
-`soundpackSettings.json` is a required element of the soundpack, and controls things like volume, and randomizing the pitch of the keyboard typing sounds.
+`soundpackSettings.json` is required. It controls the volume of the typing sounds and how much their pitch is randomized.
 </Callout>
 
-```json copy filename="json"
+```json copy filename="soundpackSettings.json"
 {
     "settings": [
         {
-            // Controls the Minumum allowed pitch when randomizing the pitch for a key press sound.
+            // The minimum pitch when randomizing the pitch of a key press sound.
             "minimumPitchRange": 1,
-            // Controls the Maximum allowed pitch when randomizing the pitch for a key press sound.
+            // The maximum pitch when randomizing the pitch of a key press sound.
             "maximumPitchRange": 1,
-            // Controls the overall volume of key press sounds.
-            "volume": 1 
+            // The overall volume of key press sounds.
+            "volume": 1
         }
     ]
 }

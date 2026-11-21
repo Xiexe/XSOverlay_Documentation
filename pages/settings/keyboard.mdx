@@ -1,0 +1,57 @@
+{/* page: keyboard */}
+# Keyboard
+
+{/* section: Layout */}
+## Layout
+
+{/* setting: KeyboardFormat */}
+### Format
+<SettingMeta default="Compact" />
+
+Which keyboard layout to show.
+
+- **Compact**: the main keys plus the navigation cluster (arrows, Home, End, Page Up/Down and so on).
+- **Minimal**: the main keys plus a reduced navigation cluster.
+- **Full**: Compact plus a numpad.
+
+{/* setting: ForceJISKeyboard */}
+### Force JIS Layout
+<SettingMeta default="Off" />
+
+Uses the Japanese (JIS) key layout regardless of your Windows keyboard layout.
+
+{/* setting: KeyboardOpacity */}
+### Opacity
+<SettingMeta default="100%" range="10% – 100%" />
+
+The keyboard's opacity.
+
+{/* section: Feedback */}
+## Feedback
+
+{/* setting: KeyboardTypingSounds */}
+### Typing Sounds
+<SettingMeta default="On" />
+
+Plays a sound for each key press.
+
+{/* setting: KeyboardSoundpackIndex */}
+### Sound Pack
+<SettingMeta default="Default" />
+
+The sound pack used for typing sounds. See [Keyboard Sound Packs](/Developer/Soundpacks/keyboard) to make your own.
+
+{/* section: Voice */}
+## Voice
+
+{/* setting: Microphone */}
+### Microphone
+<SettingMeta default="System Default" />
+
+The microphone used for speech to text.
+
+{/* setting: PreloadWhisperModel */}
+### Preload Speech Model
+<SettingMeta default="On" />
+
+Loads the speech to text model when XSOverlay starts, so speech to text is ready immediately. Uses about 200 MB of memory.

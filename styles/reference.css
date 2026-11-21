@@ -1,0 +1,55 @@
+/* Reference pages: any article that renders a SettingMeta or CommandMeta. */
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-top: 0.5rem;
+}
+
+.meta-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  line-height: 1.5rem;
+  background: hsl(var(--nextra-primary-hue) 40% 50% / 0.1);
+  color: inherit;
+}
+
+.meta-label {
+  font-weight: 600;
+  opacity: 0.6;
+}
+
+article:has(.meta) h2 {
+  margin-top: 3.5rem;
+}
+
+article:has(.meta) h3 {
+  margin-top: 0;
+  padding-top: 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+/* Divider between settings, but not directly under a section heading. */
+article:has(.meta) h3:not(h1 + h3, h2 + h3, h2 + p + h3) {
+  margin-top: 1.5rem;
+  border-top: 1px solid hsl(var(--nextra-primary-hue) 10% 50% / 0.15);
+}
+
+article:has(.meta) h3 + .meta + p,
+article:has(.meta) h3 + .meta + ul {
+  margin-top: 0.75rem;
+}
+
+/* UI screenshots share one scale; see components/screenshot.tsx. */
+.screenshot {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+}

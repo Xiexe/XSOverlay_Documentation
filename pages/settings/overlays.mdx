@@ -1,0 +1,141 @@
+{/* page: overlays */}
+# Overlays
+
+{/* section: Capture */}
+## Window Capture
+
+{/* setting: CaptureMethod */}
+### Window Capture API
+<SettingMeta default="WGC (Modern)" />
+
+The method used to capture windows.
+
+- **WGC (Modern)**: Windows Graphics Capture. Faster and less resource intensive. On Windows 10 it may draw a yellow border around captured windows; the border isn't visible in the capture itself, only when the window also appears in a desktop capture. Windows 11 doesn't draw the border.
+- **BitBlt (Legacy)**: no yellow border, but significantly slower and more resource intensive.
+
+Desktop captures always use Windows Graphics Capture when available, and fall back to BitBlt on Windows 10 builds older than 1903.
+
+{/* setting: WindowSwitchSizePreservation */}
+### Window Switch Size Preservation
+<SettingMeta default="Automatic" />
+
+Which dimension of an overlay stays fixed when you switch it to a window with a different aspect ratio.
+
+- **Height**: keeps the overlay's height and adjusts its width.
+- **Width**: keeps the overlay's width and adjusts its height.
+- **Automatic**: keeps the width when the new window's aspect ratio is within 2× of the old one, otherwise keeps the height.
+
+{/* section: Overlay_Behavior */}
+## Overlay Behavior
+
+{/* setting: AutoRecenter */}
+### Automatically Recenter
+<SettingMeta default="On" />
+
+Moves overlays back to the same position relative to you when opening [Layout Mode](/getting-started/layout-mode). For example, if you turn around 180 degrees and open Layout Mode, your overlays move back in front of you. The Recenter button on the toolbar does the same thing manually.
+
+{/* setting: InvertScaleGesture */}
+### Invert Scale Gesture
+<SettingMeta default="Off" />
+
+Reverses which direction you move your hand to scale an overlay up or down.
+
+{/* section: Overlay_Display */}
+## Overlay Display
+
+{/* setting: CurvedOverlays */}
+### Curved Overlays
+<SettingMeta default="On" />
+
+Curves overlays around you. Due to SteamVR limitations, overlays only curve while within a zone in front of you. Curvature doesn't apply to overlays attached to devices, or when [Aim At Target](#aim-at-target) is off.
+
+{/* setting: OverlayCurveBias */}
+### Overlay Curve Bias
+<SettingMeta default="1.5" range="0.1 – 5" shownWhen="Curved Overlays is On" />
+
+How strongly overlays curve inside the curve zone. Curvature is the overlay's distance from your head multiplied by this value.
+
+{/* setting: OverlayClipAngle */}
+### Overlay Clip Angle
+<SettingMeta default="68°" range="0° – 180°" />
+
+The angle at which overlays with [Auto Hide](/getting-started/overlays#auto-hide) hide themselves.
+
+{/* setting: OverlayDefaultScale */}
+### Overlay Default Scale
+<SettingMeta default="100%" range="0% – 100%" />
+
+The scale of newly created overlays.
+
+{/* setting: OverlayDefaultOpacity */}
+### Overlay Default Opacity
+<SettingMeta default="100%" range="0% – 100%" />
+
+The opacity of newly created overlays.
+
+{/* setting: OverlayDefaultMinFPS */}
+### Overlay Default Minimum FPS
+<SettingMeta default="30 FPS" range="1 FPS – 144 FPS" />
+
+The [Min FPS](/getting-started/overlays#min-fps) of newly created overlays.
+
+{/* setting: OverlayDefaultMaxFPS */}
+### Overlay Default Maximum FPS
+<SettingMeta default="60 FPS" range="1 FPS – 144 FPS" />
+
+The [Max FPS](/getting-started/overlays#max-fps) of newly created overlays.
+
+{/* section: Overlay_Movement_and_Handling */}
+## Overlay Movement and Handling
+
+{/* setting: AimTarget */}
+### Target
+<SettingMeta default="Mixed" />
+
+What held overlays point towards when [Aim At Target](#aim-at-target) is on.
+
+- **HMD**: your head.
+- **Controller**: the controller holding the overlay.
+- **Mixed**: faces the controller while the overlay is close to your hand, shifting towards your head as it gets further away (fully at 4 m).
+
+{/* setting: AimAtTarget */}
+### Aim At Target
+<SettingMeta default="On" />
+
+Makes overlays face the [Target](#target) while you hold them.
+
+{/* setting: GrabSensitivity */}
+### Grab Sensitivity
+<SettingMeta default="30%" range="0% – 100%" />
+
+How hard you need to squeeze the grip to grab an overlay. Has no effect on controllers with a non-analog grip, such as the Vive wands.
+
+{/* setting: PushSpeed */}
+### Push Speed
+<SettingMeta default="0.03" range="0 – 0.2" />
+
+How fast held overlays move when you push or pull them with the joystick.
+
+{/* setting: ScaleSpeed */}
+### Scale Speed
+<SettingMeta default="3" range="1 – 6" />
+
+How sensitive the scale gesture is. Lower values need more hand movement to scale, but are less affected by tracking jitter.
+
+{/* setting: PositionDampening */}
+### Position Dampening
+<SettingMeta default="15" range="1 – 100" />
+
+Smooths an overlay's position while held. Lower values smooth more.
+
+{/* setting: RotationDampening */}
+### Rotation Dampening
+<SettingMeta default="15" range="1 – 100" />
+
+Smooths an overlay's rotation while held. Lower values smooth more.
+
+{/* setting: SmartRollAngle */}
+### Smart Roll Angle
+<SettingMeta default="50°" range="10° – 180°" />
+
+How far your head needs to tilt before overlays roll onto their side to match it, which is useful when lying down. Set to 180° to disable.

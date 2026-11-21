@@ -1,0 +1,54 @@
+# Events
+
+Instead of polling, send `SubscribeToEvents` with a list of tags. XSOverlay sends the matching `Update…` message right away, then again whenever it changes.
+
+<Example>
+
+```js
+on('UpdateDateTime', (time) => console.log(time.Time));
+send('SubscribeToEvents', { jsonData: ['DateAndTime', 'Theme', 'MediaPlayer'] });
+```
+
+```cs
+On("UpdateDateTime", (time, _) => Console.WriteLine(time.GetProperty("Time")));
+await Send("SubscribeToEvents", new[] { "DateAndTime", "Theme", "MediaPlayer" });
+```
+
+</Example>
+
+## Tags
+
+Tag names are case-insensitive.
+
+| Tag | Sends |
+| --- | --- |
+| `DateAndTime` | [`UpdateDateTime`](commands/system#requestdatetime) |
+| `DeviceInformation` | [`UpdateDeviceInformation`](commands/system#requestdeviceinformation) |
+| `Theme` | [`UpdateTheme`](commands/settings#requestthemeupdate) |
+| `LayoutMode` | [`UpdateLayoutModeState`](commands/overlays#requestlayoutmodestate) |
+| `MediaPlayer` | [`UpdateMediaPlayer`](commands/media#requestmediaplayerupdate) |
+| `KeyboardLayout` | `UpdateKeyboardLayout` |
+| `KeyboardState` | `UpdateKeyboardState` |
+| `Languages` | [`UpdateLanguageList`](commands/settings#requestupdatedlanguagelist) |
+| `LanguageMap` | [`UpdateLanguageMap`](commands/settings#requestupdatedlanguagemap) |
+| `WindowList` | [`UpdateWindowList`](commands/overlays#requestwindowlist) |
+| `ActiveOverlay` | [`UpdateActiveOverlayInformation`](commands/overlays#requestactiveoverlayinformation) |
+| `Settings` | [`UpdateSettings`](commands/settings#requestgetsettings) |
+| `Performance` | [`UpdateRuntimePerformance`](commands/system#requestruntimeperformance) |
+| `Notifications` | `Notification`, with a [notification object](commands/notifications#sendnotification), for every notification shown |
+
+## Unsubscribing
+
+Send `UnsubscribeToEvents` with the tags to stop.
+
+<Example>
+
+```js
+send('UnsubscribeToEvents', { jsonData: ['DateAndTime'] });
+```
+
+```cs
+await Send("UnsubscribeToEvents", new[] { "DateAndTime" });
+```
+
+</Example>

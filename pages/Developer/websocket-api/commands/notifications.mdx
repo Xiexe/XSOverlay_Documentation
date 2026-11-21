@@ -1,0 +1,97 @@
+import notificationImage from '../../../../img/ui/notification-annotated.png'
+
+# Notifications
+
+### SendNotification
+<CommandMeta jsonData="Notification" />
+
+Shows a notification. Every field is optional.
+
+<Example>
+
+```js
+send('SendNotification', {
+  jsonData: {
+    title: 'Download complete',
+    content: '<b>build.zip</b> finished downloading.',
+    timeout: 5,
+    audioPath: 'default',
+  },
+});
+```
+
+```cs
+await Send("SendNotification", new
+{
+    title = "Download complete",
+    content = "<b>build.zip</b> finished downloading.",
+    timeout = 5f,
+    audioPath = "default",
+});
+```
+
+</Example>
+
+<Screenshot image={notificationImage} alt="Notification" />
+
+| Field | Type | Default | |
+| --- | --- | --- | --- |
+| `title` | `string` | `""` | Supports [Unity rich text](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html). |
+| `content` | `string` | `""` | Supports rich text. Empty shows the small form. |
+| `timeout` | `float` | `0.5` | Seconds on screen. |
+| `height` | `float` | `175` | Height when there's content. |
+| `opacity` | `float` | `1` | `0` is treated as `1`. |
+| `volume` | `float` | `0.7` | |
+| `audioPath` | `string` | `""` | `.ogg` path, or `"default"`, `"error"`, `"warning"`. Empty is silent. |
+| `icon` | `string` | `"default"` | Image path, base64 image, or `"default"`, `"error"`, `"warning"`. |
+| `useBase64Icon` | `bool` | `false` | `true` when `icon` is base64. |
+| `sourceApp` | `string` | `""` | Your app's name, shown in logs. |
+| `type` | `int` | `1` | Leave as `1`. |
+
+### PlayAudio
+<CommandMeta jsonData="AudioClip" />
+
+<Example>
+
+```js
+send('PlayAudio', { jsonData: { audioPath: 'C:/Sounds/ding.ogg', volume: 0.8 } });
+```
+
+```cs
+await Send("PlayAudio", new { audioPath = "C:/Sounds/ding.ogg", volume = 0.8f });
+```
+
+</Example>
+
+```ts filename="jsonData"
+{
+  audioPath: string
+  volume: number            // 0 – 1. Defaults to 0, so always set it.
+  spatial: boolean
+  spatialPosition: [x: number, y: number, z: number]
+  minDistance: number
+  maxDistance: number
+}
+```
+
+### PlayDeviceHaptics
+<CommandMeta jsonData="{ deviceId, duration }" />
+
+<Example>
+
+```js
+send('PlayDeviceHaptics', { jsonData: { deviceId: 'leftcontroller', duration: 2000 } });
+```
+
+```cs
+await Send("PlayDeviceHaptics", new { deviceId = "leftcontroller", duration = 2000 });
+```
+
+</Example>
+
+```ts filename="jsonData"
+{
+  deviceId: string    // "leftcontroller", "rightcontroller", or a SteamVR device index such as "3"
+  duration: number    // Microseconds, scaled by the Haptics Strength setting
+}
+```

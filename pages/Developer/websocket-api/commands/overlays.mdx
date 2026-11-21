@@ -1,0 +1,164 @@
+# Overlays
+
+### Toolbar commands
+
+These do the same thing as the matching Layout Mode toolbar button.
+
+| Command | Action |
+| --- | --- |
+| `ToggleLayoutMode` | Opens or closes Layout Mode. |
+| `TogglePerformanceStats` | Shows or hides the performance overlay. |
+| `Create` | Creates an overlay. |
+| `CreateWebBrowser` | Creates a web browser overlay. |
+| `Recenter` | Recenters the overlay space. |
+| `Keyboard` | Shows or hides the keyboard. |
+| `Settings` | Shows or hides the settings panel. |
+| `DeleteAll` | Deletes all overlays. |
+| `WindowSwitcher` | Opens the window switcher. |
+| `WindowSettings` | Shows the active overlay's settings. |
+| `WindowSelect` | Shows the active overlay's window picker. |
+| `WindowDelete` | Deletes the active overlay. |
+
+The active overlay is the one whose toolbar was opened most recently.
+
+<Example>
+
+```js
+send('ToggleLayoutMode');
+```
+
+```cs
+await Send("ToggleLayoutMode");
+```
+
+</Example>
+
+### SetActiveOverlaySetting
+<CommandMeta jsonData="{ internalName, value }" />
+
+Changes a setting on the active overlay. `value` is always a string.
+
+| `internalName` | `value` |
+| --- | --- |
+| `Pin`, `AutoHide`, `Lock`, `BlockInput` | `"true"` or `"false"` |
+| `Opacity`, `Brightness` | `0` – `1` |
+| `MaxFPS`, `MinFPS` | Frame rate |
+| `TrackingSpace` | `0` World, `1` HMD, `2` Right Controller, `3` Left Controller |
+| `CaptureSelect` | Window ID from [`RequestWindowList`](#requestwindowlist) |
+
+See [Overlays](/getting-started/overlays) for what each one does.
+
+<Example>
+
+```js
+send('SetActiveOverlaySetting', { jsonData: { internalName: 'Opacity', value: '0.5' } });
+```
+
+```cs
+await Send("SetActiveOverlaySetting", new { internalName = "Opacity", value = "0.5" });
+```
+
+</Example>
+
+### RequestActiveOverlayInformation
+<CommandMeta response="UpdateActiveOverlayInformation" />
+
+The response is sent to every connected client, not only the one that asked.
+
+<Example>
+
+```js
+on('UpdateActiveOverlayInformation', (overlay) => console.log(overlay.handle, overlay.opacity));
+send('RequestActiveOverlayInformation');
+```
+
+```cs
+On("UpdateActiveOverlayInformation", (overlay, _) => Console.WriteLine(overlay.GetProperty("opacity")));
+await Send("RequestActiveOverlayInformation");
+```
+
+</Example>
+
+```ts filename="Response"
+{
+  windowId: number          // -1 for web browser overlays
+  handle: number
+  key: string
+  isWebBrowserOverlay: boolean
+  browserId: number
+  displayName: string | null
+  trackingSpace: number     // 0 World, 1 HMD, 2 Right Controller, 3 Left Controller
+  isPinned: boolean
+  isAutoHide: boolean
+  isLocked: boolean
+  isInputBlocked: boolean
+  brightness: number
+  opacity: number
+  activeFps: number
+  inactiveFps: number
+}
+```
+
+### RequestWindowList
+<CommandMeta response="UpdateWindowList" />
+
+Windows and monitors that can be captured, keyed by window ID.
+
+<Example>
+
+```js
+on('UpdateWindowList', (windows) => {
+  for (const window of Object.values(windows)) {
+    if (window) console.log(window.id, window.title);
+  }
+});
+send('RequestWindowList');
+```
+
+```cs
+On("UpdateWindowList", (windows, _) =>
+{
+    foreach (var window in windows.EnumerateObject())
+    {
+        if (window.Value.ValueKind == JsonValueKind.Object)
+            Console.WriteLine(window.Value.GetProperty("title"));
+    }
+});
+await Send("RequestWindowList");
+```
+
+</Example>
+
+```ts filename="Response"
+{
+  [windowId: string]: {
+    id: number
+    title: string
+    appName: string
+    icon: string            // base64 image
+    isDesktop: boolean
+    isPrimaryDesktop: boolean
+    isUWP: boolean
+    isSystem: boolean
+  }
+}
+```
+
+### RequestLayoutModeState
+<CommandMeta response="UpdateLayoutModeState" />
+
+The response's `rawData` is `"True"` while Layout Mode is open, otherwise `"False"`.
+
+<Example>
+
+```js
+on('UpdateLayoutModeState', (_, rawData) => console.log('Layout Mode open:', rawData === 'True'));
+send('RequestLayoutModeState');
+```
+
+```cs
+On("UpdateLayoutModeState", (_, rawData) => Console.WriteLine($"Layout Mode open: {rawData == "True"}"));
+await Send("RequestLayoutModeState");
+```
+
+</Example>

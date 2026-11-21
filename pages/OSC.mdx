@@ -1,35 +1,44 @@
-﻿import { Callout } from 'nextra/components'
+import { Callout } from 'nextra/components'
 
-OSC (Open Sound Control) is a protocol used for communicating between applications. XSOverlay, by default, is configured to send OSC messages on port `9000`. XSOverlay does not listen for OSC messages.
-This can be changed by editing the `ExternalMessageAPIConfig.json` file located in the `[XSOverlayInstallDirectory]/XSOverlay_Data/StreamingAssets/Plugins/Config/` directory.
+OSC (Open Sound Control) is a protocol for communication between applications. By default, XSOverlay sends OSC messages to port `9000` and listens for OSC messages on port `9001`.
+These ports can be changed by editing `ExternalMessageAPIConfig.json` in `[XSOverlay install]/XSOverlay_Data/StreamingAssets/Plugins/Config/`.
 
 
 ### OSC Configuration
 
 | Option | Description | Default Value |
 | --- | --- | --- |
-| `OscSendPort` | The port XSOverlay sends to OSC messages on. | `9000` |
-| `OscListenPort` | The port XSOverlay listens to OSC messages on (UNUSED). | `9001` |
-| `OscOutputPath` | The base OSC address that is appended on each parameter. | `/avatar/parameters/` |
+| `OscSendPort` | The port XSOverlay sends OSC messages to. | `9000` |
+| `OscListenPort` | The port XSOverlay listens for OSC messages on. | `9001` |
+| `OscOutputPath` | The base OSC address prefixed to each parameter name. | `/avatar/parameters/` |
 
-Changes to this file will require a restart of XSOverlay to take effect.
+Restart XSOverlay after changing this file.
 
 <Callout>
-    You will likely need to use a port number between `20000` and `49150`. It is not advised to configure XSOverlay to use ports outside of this range as it conflict with ports allocated to your operating system or subsystem services
+Use a port number between `20000` and `49150`. Ports outside this range may conflict with ports reserved by your operating system or other services.
 </Callout>
 
 ### OSC Parameters
 
 The following OSC parameters are sent by XSOverlay:
+
 | Parameter | Description | Type |
 | --- | --- | --- |
-| `leftControllerBattery` | Left Controller Battery Percentage (Range: 0 - 1) | Float |
-| `rightControllerBattery` | Right Controller Battery Percentage (Range: 0 - 1) | Float |
-| `averageControllerBattery` | Average Controller Battery Percentage (Range: 0 - 1) | Float |
-| `averageTrackerBattery` | Average Tracker Battery Percentage (Range: 0 - 1) | Float |
-| `isOverlayOpen` | Is `true` when the overlay is open. When closed this parameter is `false` | Boolean |
-| `isKeyboardOpen` | Is `true` when the keyboard is open. When closed this parameter is `false` | Boolean |
-| `isWristVisible` | Is `true` when the wrist menu is visible. When the wrist menu is not visible this parameter is `false` | Boolean |
-| `openOverlayCount` | The number over overlays open (Range: 0 - 255) | Integer |
+| `hmdBattery` | Headset battery level (range: 0 - 1) | Float |
+| `leftControllerBattery` | Left controller battery level (range: 0 - 1) | Float |
+| `rightControllerBattery` | Right controller battery level (range: 0 - 1) | Float |
+| `averageControllerBattery` | Average controller battery level (range: 0 - 1) | Float |
+| `averageTrackerBattery` | Average tracker battery level (range: 0 - 1) | Float |
+| `isOverlayOpen` | `true` while any overlay is open, otherwise `false` | Boolean |
+| `isKeyboardOpen` | `true` while the keyboard is open, otherwise `false` | Boolean |
+| `isWristVisible` | `true` while the wrist overlay is visible, otherwise `false` | Boolean |
+| `openOverlayCount` | The number of open overlays (range: 0 - 255) | Integer |
 
-For more information on the OSC protocol and how to integrate it to your application, please refer to the [OSC Documentation](https://opensoundcontrol.org/introduction-osc).
+### VRChat (OSCQuery)
+
+While VRChat is running, XSOverlay finds it automatically with [OSCQuery](https://github.com/Vidvox/OSCQueryProposal), so these features need no port setup:
+
+- **Chatbox**: the keyboard can send text to your VRChat chatbox instead of the focused window, up to 144 characters.
+- **Microphone**: speech to text mutes your VRChat microphone while it's listening, then restores it to how it was.
+
+For more information on the OSC protocol and how to integrate it into your application, see the [OSC documentation](https://opensoundcontrol.org/introduction-osc).

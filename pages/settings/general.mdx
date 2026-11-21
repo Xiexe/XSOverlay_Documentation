@@ -1,0 +1,131 @@
+import { Callout } from 'nextra/components'
+
+{/* page: general */}
+# General
+
+<Callout>
+Settings are saved to `%USERPROFILE%\AppData\LocalLow\Xiexe\XSOverlay\config\overlaySettings.json`.
+</Callout>
+
+{/* section: XSOverlay */}
+## XSOverlay
+
+{/* setting: AllowAdminPermissions */}
+### Allow Admin Permissions
+<SettingMeta default="Off" />
+
+Lets XSOverlay run with elevated permissions without asking for confirmation on every launch. This is required to interact with elevated windows such as Task Manager. Restart XSOverlay after changing this.
+
+{/* section: Accessibility */}
+## Accessibility
+
+{/* setting: DominantHand */}
+### Dominant Hand
+<SettingMeta default="Right" options="Right, Left" />
+
+Sets your dominant hand. The wrist overlay is placed on the opposite hand, so choosing Left puts it on your right wrist.
+
+{/* setting: Language */}
+### Language
+<SettingMeta default="English" />
+
+The language used throughout the UI. Translations are provided by the community; language files live in `[XSOverlay install]/XSOverlay_Data/StreamingAssets/localization/`.
+
+{/* setting: Crowdin */}
+### Crowdin
+
+Opens the XSOverlay Crowdin project in your browser, where you can contribute or correct translations.
+
+{/* section: Mouse */}
+## Mouse
+
+{/* setting: InputMethod */}
+### Input Method
+<SettingMeta default="Emulate Mouse" />
+
+How pointing at a desktop or window capture is sent to Windows.
+
+- **Emulate Mouse**: moves and clicks the real mouse cursor.
+- **Touch Input**: sends Windows touch input, as if you were tapping a touchscreen.
+
+{/* setting: AutomaticMouseControl */}
+### Automatic Mouse Control
+<SettingMeta default="Off" shownWhen="Input Method is Emulate Mouse" />
+
+Takes control of the mouse cursor as soon as you point at a desktop or window capture. When off, you need to click first to take control.
+
+{/* setting: DoubleClickDelay */}
+### Double Click Delay
+<SettingMeta default="250 ms" range="0 ms – 1000 ms" shownWhen="Input Method is Emulate Mouse" />
+
+Freezes the cursor in place for this long after a click, making double clicks easier to land.
+
+{/* setting: PointerScale */}
+### Pointer Scale
+<SettingMeta default="100%" range="25% – 100%" />
+
+The size of the laser pointer cursor shown on overlays.
+
+{/* setting: ScrollSpeed */}
+### Scroll Speed
+<SettingMeta default="50%" range="0% – 100%" />
+
+How fast the joystick scrolls the content under the pointer.
+
+{/* setting: PointerSmoothing */}
+### Pointer Smoothing
+<SettingMeta default="100%" range="0% – 100%" />
+
+How much the pointer's movement is smoothed to filter out hand jitter. 0% turns smoothing off.
+
+{/* section: User_Interface */}
+## User Interface
+
+{/* setting: HideTooltips */}
+### Hide Tooltips
+<SettingMeta default="Off" />
+
+Hides the tooltips that appear when hovering over buttons.
+
+{/* section: Miscellaneous */}
+## Miscellaneous
+
+{/* setting: DiscordRichPresence */}
+### Discord Rich Presence
+<SettingMeta default="On" />
+
+Shows XSOverlay as your current activity on Discord, alongside the VR game you're running.
+
+{/* setting: LowBatterySound */}
+### Low Battery Sound
+<SettingMeta default="On" />
+
+Plays a sound when a tracked device's battery drops below the [Low Battery Warning Percent](#low-battery-warning-percent).
+
+{/* setting: LowBatteryWarningPercent */}
+### Low Battery Warning Percent
+<SettingMeta default="15%" range="5% – 25%" />
+
+The battery level at which a device is considered low.
+
+{/* setting: HapticsStrength */}
+### Haptics Strength
+<SettingMeta default="100%" range="0% – 100%" />
+
+The strength of haptic feedback, such as when hovering over buttons.
+
+{/* section: Analytics */}
+## Analytics
+
+{/* setting: SendAnalytics */}
+### Send Analytics
+<SettingMeta default="On" />
+
+Sends anonymous usage data that helps improve XSOverlay. It is not tied to you and contains nothing personally identifiable:
+
+- System specs
+- HMD model
+- Changed settings
+- Errors and crash reports
+- VR application
+- Startup and shutdown

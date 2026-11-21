@@ -1,0 +1,42 @@
+import { Callout } from 'nextra/components'
+
+# Messages
+
+Every message, in both directions, is a JSON object with these fields:
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `sender` | `string` | Set by XSOverlay to your `client` name. Any value you send is replaced. |
+| `target` | `string` | Who receives the message. See [Targets](#targets). |
+| `command` | `string` | The [command](commands/overlays) to run. |
+| `jsonData` | `string` | Command payload, **serialized to a JSON string**. |
+| `rawData` | `string` | Single-value payload for commands that take one, such as `"true"` or a layout slot number. |
+
+<Callout type="warning">
+`jsonData` is a string containing JSON, not a nested object. Serialize the payload before you put it in the message, and parse it again when reading responses.
+</Callout>
+
+```json filename="Message"
+{
+  "sender": "MyApp",
+  "target": "xsoverlay",
+  "command": "SendNotification",
+  "jsonData": "{\"title\":\"Hello\",\"content\":\"From MyApp\",\"timeout\":5}",
+  "rawData": null
+}
+```
+
+## Responses
+
+Commands that return data reply with an `Update…` command sent to your client name. `RequestDateTime`, for example, is answered with `UpdateDateTime`. Each command page lists its response under **Response**.
+
+Most responses carry their data in `jsonData`. A few, such as `UpdateLayoutModeState` and `UpdateSteamAvatar`, use `rawData` instead.
+
+## Targets
+
+| `target` | Delivered to |
+| --- | --- |
+| `"xsoverlay"` | XSOverlay. Use this for every command. |
+| Another client's name | That app, letting apps message each other. |
+| `"all"` | Every connected app. |
+| `"systemui"` | XSOverlay's own UI panels. |

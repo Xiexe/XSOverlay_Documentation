@@ -1,0 +1,47 @@
+{/* page: night-light */}
+# Night Light
+
+{/* setting: NightLight */}
+### Night Light
+<SettingMeta default="Off" />
+
+Tints your view warmer to reduce blue light.
+
+{/* setting: NightLightIntensity */}
+### Intensity
+<SettingMeta default="50%" range="0% – 100%" />
+
+How strong the tint is.
+
+{/* section: Schedule */}
+## Schedule
+
+{/* setting: NightLightSchedule */}
+### Use Schedule
+<SettingMeta default="Off" />
+
+Turns Night Light on and off automatically between the start and end hours.
+
+{/* setting: NightLightStartHour */}
+### Night Light Start Hour
+<SettingMeta default="1" range="1 – 12" shownWhen="Use Schedule is On" />
+
+The hour Night Light turns on.
+
+{/* setting: NightLightStartAMPM */}
+### Start AM / PM
+<SettingMeta shownWhen="Use Schedule is On" />
+
+Whether the start hour is AM or PM.
+
+{/* setting: NightLightEndHour */}
+### Night Light End Hour
+<SettingMeta default="1" range="1 – 12" shownWhen="Use Schedule is On" />
+
+The hour Night Light turns off.
+
+{/* setting: NightLightEndAMPM */}
+### End AM / PM
+<SettingMeta shownWhen="Use Schedule is On" />
+
+Whether the end hour is AM or PM.

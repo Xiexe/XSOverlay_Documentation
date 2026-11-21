@@ -1,0 +1,100 @@
+# Client Setup
+
+Every example in [Commands](commands/overlays) uses these two helpers: `send` to run a command, and `on` to handle its [response](messages#responses).
+
+<Example>
+
+```js filename="xsoverlay.js" copy
+const ws = new WebSocket('ws://localhost:42070/?client=MyApp');
+const handlers = {};
+
+function send(command, { jsonData, rawData } = {}) {
+  ws.send(JSON.stringify({
+    target: 'xsoverlay',
+    command,
+    jsonData: jsonData === undefined ? undefined : JSON.stringify(jsonData),
+    rawData,
+  }));
+}
+
+function on(command, handler) {
+  handlers[command] = handler;
+}
+
+ws.addEventListener('message', (event) => {
+  const message = JSON.parse(event.data);
+  const data = message.jsonData ? JSON.parse(message.jsonData) : null;
+  handlers[message.command]?.(data, message.rawData);
+});
+```
+
+```cs filename="XSOverlay.cs" copy
+using System.Net.WebSockets;
+using System.Text.Json;
+
+var ws = new ClientWebSocket();
+await ws.ConnectAsync(new Uri("ws://localhost:42070/?client=MyApp"), CancellationToken.None);
+var handlers = new Dictionary<string, Action<JsonElement, string?>>();
+
+Task Send(string command, object? jsonData = null, string? rawData = null)
+{
+    byte[] message = JsonSerializer.SerializeToUtf8Bytes(new
+    {
+        target = "xsoverlay",
+        command,
+        jsonData = jsonData is null ? null : JsonSerializer.Serialize(jsonData),
+        rawData,
+    });
+    return ws.SendAsync(message, WebSocketMessageType.Text, true, CancellationToken.None);
+}
+
+void On(string command, Action<JsonElement, string?> handler) => handlers[command] = handler;
+
+_ = Task.Run(async () =>
+{
+    var buffer = new byte[64 * 1024];
+    while (ws.State == WebSocketState.Open)
+    {
+        using var stream = new MemoryStream();
+        WebSocketReceiveResult result;
+        do
+        {
+            result = await ws.ReceiveAsync(buffer, CancellationToken.None);
+            stream.Write(buffer, 0, result.Count);
+        } while (!result.EndOfMessage);
+
+        var message = JsonSerializer.Deserialize<JsonElement>(stream.ToArray());
+        string command = message.GetProperty("command").GetString()!;
+        string? json = message.GetProperty("jsonData").GetString();
+        string? raw = message.GetProperty("rawData").GetString();
+        JsonElement data = json is null ? default : JsonSerializer.Deserialize<JsonElement>(json);
+
+        if (handlers.TryGetValue(command, out var handler))
+            handler(data, raw);
+    }
+});
+```
+
+</Example>
+
+With those in place, sending a notification and reading the clock looks like this:
+
+<Example>
+
+```js
+ws.addEventListener('open', () => {
+  send('SendNotification', { jsonData: { title: 'Hello', content: 'From MyApp', timeout: 5 } });
+
+  on('UpdateDateTime', (time) => console.log(time.Time));
+  send('RequestDateTime');
+});
+```
+
+```cs
+await Send("SendNotification", new { title = "Hello", content = "From MyApp", timeout = 5f });
+
+On("UpdateDateTime", (time, _) => Console.WriteLine(time.GetProperty("Time")));
+await Send("RequestDateTime");
+```
+
+</Example>

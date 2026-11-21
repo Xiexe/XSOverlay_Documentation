@@ -1,0 +1,43 @@
+# Layouts
+
+### LoadLayout, SaveLayout, DeleteLayout, FavoriteLayout
+<CommandMeta rawData="slot index" />
+
+Acts on a saved layout. Slots start at `0`.
+
+<Example>
+
+```js
+send('LoadLayout', { rawData: '0' });
+```
+
+```cs
+await Send("LoadLayout", rawData: "0");
+```
+
+</Example>
+
+### RequestLayoutInfo
+<CommandMeta response="UpdateLayoutInfo" />
+
+<Example>
+
+```js
+on('UpdateLayoutInfo', (info) => console.log('Loaded layout:', info.current));
+send('RequestLayoutInfo');
+```
+
+```cs
+On("UpdateLayoutInfo", (info, _) => Console.WriteLine($"Loaded layout: {info.GetProperty("current")}"));
+await Send("RequestLayoutInfo");
+```
+
+</Example>
+
+```ts filename="Response"
+{
+  current: string     // Index of the loaded layout
+  favorite: string    // Index of the favorite layout
+  layouts: { name: string, index: number, version: number, windowCount: number }[]
+}
+```
