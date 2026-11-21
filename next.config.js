@@ -2,7 +2,9 @@ const withNextra = require('nextra')({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.tsx',
   staticImage: true,
-
+  mdxOptions: {
+    rehypePlugins: [require('./mdx-plugins/rehype-reference-cards')],
+  },
 })
 
 const redirects = [

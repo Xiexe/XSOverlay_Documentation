@@ -28,22 +28,37 @@ article:has(.meta) h2 {
   margin-top: 3.5rem;
 }
 
-article:has(.meta) h3 {
+/* One card per setting or API command; see mdx-plugins/rehype-reference-cards.js. */
+.reference-card {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid hsl(var(--nextra-primary-hue) 10% 50% / 0.2);
+  border-radius: 0.75rem;
+}
+
+h1 + .reference-card {
+  margin-top: 2rem;
+}
+
+article .reference-card > h3 {
   margin-top: 0;
-  padding-top: 1.5rem;
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
 
-/* Divider between settings, but not directly under a section heading. */
-article:has(.meta) h3:not(h1 + h3, h2 + h3, h2 + p + h3) {
-  margin-top: 1.5rem;
-  border-top: 1px solid hsl(var(--nextra-primary-hue) 10% 50% / 0.15);
+.reference-card > h3 + .meta + p,
+.reference-card > h3 + .meta + ul {
+  margin-top: 0.75rem;
 }
 
-article:has(.meta) h3 + .meta + p,
-article:has(.meta) h3 + .meta + ul {
-  margin-top: 0.75rem;
+.reference-card > :last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .reference-card {
+    padding: 1rem;
+  }
 }
 
 /* UI screenshots share one scale; see components/screenshot.tsx. */
