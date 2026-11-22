@@ -28,7 +28,7 @@ article:has(.meta) h2 {
   margin-top: 3.5rem;
 }
 
-/* One card per setting or API command; see mdx-plugins/rehype-reference-cards.js. */
+/* One card per setting, API command or troubleshooting issue; see mdx-plugins/rehype-reference-cards.js. */
 .reference-card {
   margin-top: 1.5rem;
   padding: 1.25rem 1.5rem;
@@ -40,8 +40,10 @@ h1 + .reference-card {
   margin-top: 2rem;
 }
 
-article .reference-card > h3 {
+article .reference-card > :is(h2, h3) {
   margin-top: 0;
+  padding-bottom: 0;
+  border-bottom: none;
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
