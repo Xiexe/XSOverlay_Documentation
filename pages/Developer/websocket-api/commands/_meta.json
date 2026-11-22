@@ -1,0 +1,9 @@
+{
+  "overlays": "Overlays",
+  "layouts": "Layouts",
+  "notifications": "Notifications",
+  "settings": "Settings",
+  "media": "Media",
+  "system": "System",
+  "web-apps": "Web App Overlays"
+}

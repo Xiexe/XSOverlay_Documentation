@@ -1,0 +1,30 @@
+import { Callout } from 'nextra/components'
+
+{/* page: experimental */}
+# Experimental
+
+<Callout type="warning">
+These settings may be unstable, or may be removed in the future due to SteamVR changes.
+</Callout>
+
+{/* section: Experimental_Settings */}
+## Experimental Settings
+
+{/* setting: ForceHigherQualityOverlays */}
+### Force Higher Quality Overlay Rendering
+<SettingMeta default="Off" />
+
+Forces SteamVR to render the compositor layer at 125% render scale, making overlays sharper at the cost of extra GPU usage. Restart SteamVR after turning this on.
+
+{/* setting: BlockInputToBackgroundApplication */}
+### Block Input to Background Apps
+<SettingMeta default="Off" />
+
+Stops controller input from reaching the VR game or app running behind XSOverlay, so clicking or grabbing an overlay doesn't also act in the game. When input is blocked is set by [Input Blocking Behavior](#input-blocking-behavior).
+
+{/* setting: InputBlockingBehavior */}
+### Input Blocking Behavior
+<SettingMeta default="Layout Mode" shownWhen="Block Input to Background Apps is On" />
+
+- **Layout Mode**: input is blocked the whole time [Layout Mode](/getting-started/layout-mode) is open, and returns to the game when you close it.
+- **Hover**: input is blocked only while you're pointing at an overlay, so you can keep playing with Layout Mode open.

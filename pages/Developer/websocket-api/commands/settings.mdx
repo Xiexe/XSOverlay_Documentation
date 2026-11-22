@@ -1,0 +1,148 @@
+# Settings
+
+### SetXSOverlaySystemSetting
+<CommandMeta jsonData="{ internalName, value }" />
+
+Changes a global setting. `internalName` is a key from [`RequestGetSettings`](#requestgetsettings). `value` is always a string, such as `"true"`, `"0.5"`, or a dropdown option index like `"2"`.
+
+<Example>
+
+```js
+send('SetXSOverlaySystemSetting', { jsonData: { internalName: 'UseDarkTheme', value: 'false' } });
+```
+
+```cs
+await Send("SetXSOverlaySystemSetting", new { internalName = "UseDarkTheme", value = "false" });
+```
+
+</Example>
+
+### RequestGetSettings
+<CommandMeta response="UpdateSettings" />
+
+Every global setting, keyed by its internal name. See [Settings](/settings/general) for what each one does.
+
+<Example>
+
+```js
+on('UpdateSettings', (settings) => console.log('Dark theme:', settings.UseDarkTheme));
+send('RequestGetSettings');
+```
+
+```cs
+On("UpdateSettings", (settings, _) => Console.WriteLine($"Dark theme: {settings.GetProperty("UseDarkTheme")}"));
+await Send("RequestGetSettings");
+```
+
+</Example>
+
+Percent sliders are `0` – `1`, and dropdowns are the option's index:
+
+| Key | Values |
+| --- | --- |
+| `DominantHand` | `0` Right, `1` Left |
+| `InputMethod` | `0` Touch Input, `1` Emulate Mouse |
+| `KeyboardFormat` | `0` Compact, `1` Minimal, `2` Full |
+| `CaptureMethod` | `0` WGC, `1` BitBlt |
+| `WindowSwitchSizePreservation` | `0` Height, `1` Width, `2` Automatic |
+| `AimTarget` | `0` Mixed, `1` HMD, `2` Controller |
+| `DateFormat` | `0` DD / MM / YY, `1` MM / DD / YY, `2` YY / MM / DD |
+| `InputBlockingBehavior` | `0` Hover, `1` Layout Mode |
+
+`AccentColor` is `{ r, g, b, a }`. `NotificationOffsets`, `WristOffsets` and `WristRotation` are `{ x, y, z }`. `WristToolbarButtons` maps each button name to `true` or `false`.
+
+### RequestThemeUpdate
+<CommandMeta response="UpdateTheme" />
+
+Colors are `RRGGBBAA` hex strings without `#`.
+
+<Example>
+
+```js
+on('UpdateTheme', (theme) => {
+  document.body.style.background = `#${theme.Dark}`;
+  document.body.style.color = `#${theme.Contrast}`;
+});
+send('RequestThemeUpdate');
+```
+
+```cs
+On("UpdateTheme", (theme, _) => Console.WriteLine($"Accent: #{theme.GetProperty("Accent")}"));
+await Send("RequestThemeUpdate");
+```
+
+</Example>
+
+```ts filename="Response"
+{
+  ThemeType: number     // 0 None, 1 Standard, 2 Media
+  UseMediaTheme: boolean
+  Hi: string
+  Mid: string
+  Dark: string
+  Contrast: string
+  Error: string
+  Warning: string
+  Confirm: string
+  Accent: string
+  AccentBright: string
+}
+```
+
+### RequestUpdatedLanguageList
+<CommandMeta response="UpdateLanguageList" />
+
+Maps each language's display name to its file path.
+
+<Example>
+
+```js
+on('UpdateLanguageList', (languages) => console.log(Object.keys(languages)));
+send('RequestUpdatedLanguageList');
+```
+
+```cs
+On("UpdateLanguageList", (languages, _) =>
+{
+    foreach (var language in languages.EnumerateObject())
+        Console.WriteLine(language.Name);
+});
+await Send("RequestUpdatedLanguageList");
+```
+
+</Example>
+
+### RequestUpdatedLanguageMap
+<CommandMeta response="UpdateLanguageMap" />
+
+Every UI string in the current language, keyed by translation key. Missing strings fall back to English.
+
+<Example>
+
+```js
+on('UpdateLanguageMap', (strings) => console.log(strings.Settings));
+send('RequestUpdatedLanguageMap');
+```
+
+```cs
+On("UpdateLanguageMap", (strings, _) => Console.WriteLine(strings.GetProperty("Settings")));
+await Send("RequestUpdatedLanguageMap");
+```
+
+</Example>
+
+### OpenSteamVRBindings
+
+Opens the SteamVR bindings page for XSOverlay.
+
+<Example>
+
+```js
+send('OpenSteamVRBindings');
+```
+
+```cs
+await Send("OpenSteamVRBindings");
+```
+
+</Example>

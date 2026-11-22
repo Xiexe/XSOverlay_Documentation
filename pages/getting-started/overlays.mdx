@@ -1,0 +1,77 @@
+import overlaySettingsImage from '../../img/ui/overlay-settings-annotated.png'
+
+{/* page: overlays */}
+# Overlays
+
+Each overlay has its own settings. Open them with the Settings button on the overlay's [toolbar](/getting-started/layout-mode#overlay-toolbar).
+
+<Screenshot image={overlaySettingsImage} alt="Overlay settings" />
+
+{/* section: Modifiers */}
+## Modifiers
+
+{/* setting: Pin */}
+### Pin
+<SettingMeta default="Off" />
+
+Keeps the overlay visible when [Layout Mode](/getting-started/layout-mode) is closed.
+
+{/* setting: AutoHide */}
+### Auto Hide
+<SettingMeta default="Off" />
+
+Hides the overlay when you look away from it, based on the [Overlay Clip Angle](/settings/overlays#overlay-clip-angle), similar to the wrist overlay.
+
+{/* setting: Lock */}
+### Lock
+<SettingMeta default="Off" />
+
+Prevents all interaction with the overlay, including grabbing and clicking.
+
+{/* setting: BlockInput */}
+### Block Input
+<SettingMeta default="Off" />
+
+Prevents mouse input on the overlay.
+
+{/* section: Settings */}
+## Settings
+
+{/* setting: TrackingSpace */}
+### Tracking Space
+<SettingMeta default="World" />
+
+What the overlay is attached to.
+
+- **World**: stays in place in your play space.
+- **HMD**: follows your head.
+- **Right Controller** / **Left Controller**: follows that controller.
+
+{/* setting: Brightness */}
+### Brightness
+<SettingMeta default="100%" range="0% – 100%" />
+
+How bright the overlay is.
+
+{/* setting: Opacity */}
+### Opacity
+<SettingMeta default="100%" range="0% – 100%" />
+
+The overlay's opacity.
+
+{/* setting: MaxFPS */}
+### Max FPS
+<SettingMeta default="60 FPS" range="1 FPS – 144 FPS" />
+
+The frame rate the overlay updates at while active.
+
+{/* setting: MinFPS */}
+### Min FPS
+<SettingMeta default="60 FPS" range="1 FPS – 144 FPS" />
+
+The frame rate the overlay updates at while inactive.
+
+{/* setting: CaptureSelect */}
+### Capture
+
+The window or monitor this overlay shows. Select it to pick another; the [Windows](/getting-started/layout-mode#overlay-toolbar) button on the overlay's toolbar opens the same list.

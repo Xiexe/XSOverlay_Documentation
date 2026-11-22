@@ -1,0 +1,177 @@
+# System
+
+### RequestDateTime
+<CommandMeta response="UpdateDateTime" />
+
+Formatted using the user's clock and date settings.
+
+<Example>
+
+```js
+on('UpdateDateTime', (time) => console.log(time.Date, time.Time));
+send('RequestDateTime');
+```
+
+```cs
+On("UpdateDateTime", (time, _) => Console.WriteLine($"{time.GetProperty("Date")} {time.GetProperty("Time")}"));
+await Send("RequestDateTime");
+```
+
+</Example>
+
+```ts filename="Response"
+{ Date: string, Time: string, CurrentSessionLength: string }
+```
+
+### RequestDeviceInformation
+<CommandMeta response="UpdateDeviceInformation" />
+
+An array of tracked devices.
+
+<Example>
+
+```js
+on('UpdateDeviceInformation', (devices) => {
+  for (const device of devices) console.log(device.name, `${device.battery}%`);
+});
+send('RequestDeviceInformation');
+```
+
+```cs
+On("UpdateDeviceInformation", (devices, _) =>
+{
+    foreach (var device in devices.EnumerateArray())
+        Console.WriteLine($"{device.GetProperty("name")} {device.GetProperty("battery")}%");
+});
+await Send("RequestDeviceInformation");
+```
+
+</Example>
+
+```ts filename="Response"
+{
+  id: number                  // SteamVR device index
+  classification: number      // 0 Unknown, 1 HMD, 2 Controller, 3 Tracker, 4 Base Station
+  type: number                // 0 Unknown, 1 Index, 2 Vive, 3 Oculus, 4 Rift CV1, 5 Rift S, 6 WMR, 7 Pimax, 8 Tundra
+  name: string
+  label: string
+  friendlyName: string
+  battery: number             // 0 – 100
+  charging: boolean
+  timeEstimate: string        // Estimated battery time remaining
+  connection: number          // SteamVR EDeviceActivityLevel
+  isSupported: boolean
+  fingerprint: string         // Unique SteamVR identifier
+  lastUpdated: string         // ISO 8601
+  lastBatteryUpdate: string   // ISO 8601
+  runningBatterySecondsPerPercent: number[]
+  runningBatteryIndex: number
+  deviceDidPingLowBattery: boolean
+  waitingForFirstRealBatteryUpdate: boolean
+}[]
+```
+
+### RequestRuntimePerformance
+<CommandMeta response="UpdateRuntimePerformance" />
+
+Subscribe to `Performance` to receive this continuously.
+
+<Example>
+
+```js
+on('UpdateRuntimePerformance', (perf) => console.log(`GPU ${perf.GPU.Load}%, ${perf.Framerate} FPS`));
+send('SubscribeToEvents', { jsonData: ['Performance'] });
+```
+
+```cs
+On("UpdateRuntimePerformance", (perf, _) =>
+    Console.WriteLine($"GPU {perf.GetProperty("GPU").GetProperty("Load")}%, {perf.GetProperty("Framerate")} FPS"));
+await Send("SubscribeToEvents", new[] { "Performance" });
+```
+
+</Example>
+
+```ts filename="Response"
+{
+  CPU: Hardware
+  GPU: Hardware
+  Memory: Hardware
+  GpuFrametime: number      // ms
+  CpuFrametime: number      // ms
+  TotalFrametime: number    // ms
+  Framerate: number
+  MaxFrametime: number      // Frame budget at the headset's refresh rate, in ms
+  MaxFramerate: number      // Headset refresh rate
+}
+
+type Hardware = {
+  Type: number              // 0 Generic, 1 GPU, 2 CPU, 3 Memory
+  Manufacturer: number      // 0 Nvidia, 1 AMD, 2 Intel, 3 Generic
+  Name: string
+  Temperature: number
+  Load: number
+  MemLoad: number
+  MemSize: number
+}
+```
+
+### RequestSteamAvatar
+<CommandMeta rawData="small | medium | large" response="UpdateSteamAvatar" />
+
+The response's `rawData` is the user's Steam avatar as a base64 PNG. Size defaults to medium.
+
+<Example>
+
+```js
+on('UpdateSteamAvatar', (_, png) => {
+  document.querySelector('#avatar').src = `data:image/png;base64,${png}`;
+});
+send('RequestSteamAvatar', { rawData: 'large' });
+```
+
+```cs
+On("UpdateSteamAvatar", (_, png) => File.WriteAllBytes("avatar.png", Convert.FromBase64String(png!)));
+await Send("RequestSteamAvatar", rawData: "large");
+```
+
+</Example>
+
+### RequestAchievementInformation
+<CommandMeta response="UpdateAchievementStatus" />
+
+Maps each achievement ID to whether it's unlocked.
+
+<Example>
+
+```js
+on('UpdateAchievementStatus', (achievements) => console.log(achievements));
+send('RequestAchievementInformation');
+```
+
+```cs
+On("UpdateAchievementStatus", (achievements, _) =>
+{
+    foreach (var achievement in achievements.EnumerateObject())
+        Console.WriteLine($"{achievement.Name}: {achievement.Value}");
+});
+await Send("RequestAchievementInformation");
+```
+
+</Example>
+
+### Log
+<CommandMeta rawData="message" />
+
+Writes the message to XSOverlay's output log.
+
+<Example>
+
+```js
+send('Log', { rawData: 'Hello from MyApp' });
+```
+
+```cs
+await Send("Log", rawData: "Hello from MyApp");
+```
+
+</Example>

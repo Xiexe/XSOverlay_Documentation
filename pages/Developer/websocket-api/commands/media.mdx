@@ -1,0 +1,70 @@
+# Media
+
+### MediaPlayPause, MediaPrevious, MediaNext
+
+Presses the matching Windows media key.
+
+<Example>
+
+```js
+send('MediaPlayPause');
+```
+
+```cs
+await Send("MediaPlayPause");
+```
+
+</Example>
+
+### UpdateMediaPlayerInformation
+<CommandMeta jsonData="Media" />
+
+Sets what the wrist media player shows. Same shape as the [`RequestMediaPlayerUpdate`](#requestmediaplayerupdate) response.
+
+<Example>
+
+```js
+send('UpdateMediaPlayerInformation', {
+  jsonData: { title: 'Song', artist: 'Artist', album: 'Album', applicationName: 'MyPlayer' },
+});
+```
+
+```cs
+await Send("UpdateMediaPlayerInformation", new
+{
+    title = "Song",
+    artist = "Artist",
+    album = "Album",
+    applicationName = "MyPlayer",
+});
+```
+
+</Example>
+
+### RequestMediaPlayerUpdate
+<CommandMeta response="UpdateMediaPlayer" />
+
+<Example>
+
+```js
+on('UpdateMediaPlayer', (media) => console.log(`${media.artist} – ${media.title}`));
+send('RequestMediaPlayerUpdate');
+```
+
+```cs
+On("UpdateMediaPlayer", (media, _) => Console.WriteLine($"{media.GetProperty("artist")} – {media.GetProperty("title")}"));
+await Send("RequestMediaPlayerUpdate");
+```
+
+</Example>
+
+```ts filename="Response"
+{
+  title: string
+  album: string
+  artist: string
+  albumArt: string          // base64 image
+  applicationName: string
+  playbackStatus: string
+}
+```

@@ -1,4 +1,5 @@
 {
-  "API": "API",
-  "Soundpacks": "Soundpacks"
+  "websocket-api": "WebSocket API",
+  "legacy-udp-notifications": "UDP Notifications (Legacy)",
+  "Soundpacks": "Sound Packs"
 }

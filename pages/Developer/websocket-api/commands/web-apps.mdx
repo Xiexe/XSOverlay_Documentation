@@ -1,0 +1,44 @@
+# Web App Overlays
+
+### RequestOverlayIDs
+<CommandMeta response="UpdateOverlayIDs" />
+
+Maps each web app overlay's page URL to its overlay handle. A web app can look up its own by its URL.
+
+<Example>
+
+```js
+on('UpdateOverlayIDs', (handles) => console.log('My overlay handle:', handles[window.location.href]));
+send('RequestOverlayIDs');
+```
+
+```cs
+On("UpdateOverlayIDs", (handles, _) =>
+{
+    foreach (var overlay in handles.EnumerateObject())
+        Console.WriteLine($"{overlay.Name}: {overlay.Value}");
+});
+await Send("RequestOverlayIDs");
+```
+
+</Example>
+
+### RequestUpdateOverlayCanvasSize
+<CommandMeta jsonData="{ width, height }" rawData="overlay handle" />
+
+Changes the resolution of a web app overlay.
+
+<Example>
+
+```js
+send('RequestUpdateOverlayCanvasSize', {
+  jsonData: { width: 1024, height: 768 },
+  rawData: String(handle),
+});
+```
+
+```cs
+await Send("RequestUpdateOverlayCanvasSize", new { width = 1024, height = 768 }, rawData: handle.ToString());
+```
+
+</Example>

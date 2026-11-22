@@ -1,0 +1,87 @@
+import notificationImage from '../../img/ui/notification-annotated.png'
+
+import { Callout, Tabs } from 'nextra/components'
+
+# UDP Notifications
+
+<Callout type="warning">
+This API is kept for existing apps. New apps should use [`SendNotification`](/Developer/websocket-api/commands/notifications#sendnotification) over the [WebSocket API](/Developer/websocket-api/overview).
+</Callout>
+
+Send a notification object as UTF-8 JSON in a UDP datagram to `127.0.0.1:42069`.
+
+The port is set by `UdpPort` in `[XSOverlay install]/XSOverlay_Data/StreamingAssets/Plugins/Config/ExternalMessageAPIConfig.json`.
+
+## Notification object
+
+<Screenshot image={notificationImage} alt="Notification" />
+
+The fields are the same as the [WebSocket notification object](/Developer/websocket-api/commands/notifications#sendnotification), except the type field is called `messageType` and must be `1`.
+
+| Field | Type | Default | Description |
+| --- | --- | --- | --- |
+| `messageType` | `int` | `0` | Must be `1`, or the message is ignored. |
+| `title` | `string` | `""` | Supports [Unity rich text](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html). |
+| `content` | `string` | `""` | Supports rich text. When empty, the notification is shown in its small form. |
+| `timeout` | `float` | `0.5` | Seconds on screen. |
+| `height` | `float` | `175` | Height when the notification has content. |
+| `opacity` | `float` | `1` | `0` is treated as `1`. |
+| `volume` | `float` | `0.7` | Sound volume. |
+| `audioPath` | `string` | `""` | Path to an `.ogg` file, or `"default"`, `"error"` or `"warning"`. Silent when empty. |
+| `icon` | `string` | `"default"` | Image path, base64 image, or `"default"`, `"error"` or `"warning"`. |
+| `useBase64Icon` | `bool` | `false` | Set to `true` when `icon` is base64. |
+| `sourceApp` | `string` | `""` | Your app's name, shown in logs. |
+
+## Examples
+
+<Tabs items={['XSNotifications (C#)', 'C#', 'Python']}>
+<Tabs.Tab>
+[XSNotifications](https://www.nuget.org/packages/XSNotifications/) ([GitHub](https://github.com/nnaaa-vr/XSNotifications)) is a NuGet package that wraps this API.
+
+```cs filename="Program.cs" copy
+using XSNotifications;
+
+new XSNotifier().SendNotification(new XSNotification { Title = "Notification" });
+```
+</Tabs.Tab>
+<Tabs.Tab>
+```cs filename="Program.cs" copy
+using System.Net.Sockets;
+using System.Text.Json;
+
+var notification = new
+{
+    messageType = 1,
+    title = "Example Notification",
+    content = "It's an example!",
+    timeout = 6f,
+    audioPath = "default",
+    volume = 0.5f,
+    sourceApp = "MyApp",
+};
+
+using var udp = new UdpClient();
+byte[] bytes = JsonSerializer.SerializeToUtf8Bytes(notification);
+udp.Send(bytes, bytes.Length, "127.0.0.1", 42069);
+```
+</Tabs.Tab>
+<Tabs.Tab>
+```py filename="notify.py" copy
+import json
+import socket
+
+notification = {
+    "messageType": 1,
+    "title": "Example Notification",
+    "content": "It's an example!",
+    "timeout": 6,
+    "audioPath": "default",
+    "volume": 0.5,
+    "sourceApp": "MyApp",
+}
+
+with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+    sock.sendto(json.dumps(notification).encode("utf-8"), ("127.0.0.1", 42069))
+```
+</Tabs.Tab>
+</Tabs>

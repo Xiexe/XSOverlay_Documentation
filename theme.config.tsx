@@ -1,7 +1,17 @@
 import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
+import { CommandMeta, SettingMeta } from './components/meta'
+import { Example } from './components/example'
+import { Screenshot } from './components/screenshot'
 
 const config: DocsThemeConfig = {
+  useNextSeoProps() {
+    return { titleTemplate: '%s – XSOverlay' }
+  },
+  // #29BCB7
+  primaryHue: 178,
+  primarySaturation: 64,
+  components: { SettingMeta, CommandMeta, Example, Screenshot },
   head: (
       <>
           <link

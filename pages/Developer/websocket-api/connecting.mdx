@@ -1,0 +1,17 @@
+# Connecting
+
+Connect to `ws://localhost:42070/?client=<YourAppName>`.
+
+The `client` query parameter is required. It's the name XSOverlay uses to route responses back to you, so pick something unique to your app. Several connections can share a name; messages sent to that name go to all of them.
+
+## Port
+
+The port is set by `WebSocketPort` in `[XSOverlay install]/XSOverlay_Data/StreamingAssets/Plugins/Config/ExternalMessageAPIConfig.json`.
+
+## Access levels
+
+| Connection | Commands available |
+| --- | --- |
+| Desktop apps and scripts | All commands |
+| Web pages served from `localhost` or `127.0.0.1` | All commands |
+| Web pages served from any other origin | [`SendNotification`](commands/notifications#sendnotification) and [`RequestDeviceInformation`](commands/system#requestdeviceinformation) only |

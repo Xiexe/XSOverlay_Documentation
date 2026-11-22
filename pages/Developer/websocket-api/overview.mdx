@@ -1,0 +1,41 @@
+# WebSocket API
+
+XSOverlay runs a WebSocket server that apps can use to send notifications, read device and overlay state, change settings, and drive the overlay.
+
+## Send your first notification
+
+With XSOverlay running, this shows a notification in VR:
+
+<Example>
+
+```js filename="hello.js" copy
+const ws = new WebSocket('ws://localhost:42070/?client=MyApp');
+
+ws.addEventListener('open', () => {
+  ws.send(JSON.stringify({
+    target: 'xsoverlay',
+    command: 'SendNotification',
+    jsonData: JSON.stringify({ title: 'Hello from MyApp', timeout: 5 }),
+  }));
+});
+```
+
+```cs filename="Hello.cs" copy
+using System.Net.WebSockets;
+using System.Text.Json;
+
+using var ws = new ClientWebSocket();
+await ws.ConnectAsync(new Uri("ws://localhost:42070/?client=MyApp"), CancellationToken.None);
+
+byte[] message = JsonSerializer.SerializeToUtf8Bytes(new
+{
+    target = "xsoverlay",
+    command = "SendNotification",
+    jsonData = JsonSerializer.Serialize(new { title = "Hello from MyApp", timeout = 5f }),
+});
+await ws.SendAsync(message, WebSocketMessageType.Text, true, CancellationToken.None);
+```
+
+</Example>
+
+To go further, set up the [client helpers](client-setup) used by every example in [Commands](commands/overlays).
